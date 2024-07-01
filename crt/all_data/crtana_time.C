@@ -79,7 +79,7 @@ int crtana_time() {
         
 	TH1D* histogram_t_t = new TH1D("histogram2D", "Time", 300, 1520e3, 1540e3);
 	
-    	bool cl_has_sp;
+    	std::vector<bool>* cl_has_sp = nullptr;
     	std::vector<double>* cl_sp_x = nullptr;
     	std::vector<double>* cl_sp_ts1 = nullptr;
 
