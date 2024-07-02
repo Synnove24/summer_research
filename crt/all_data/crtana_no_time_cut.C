@@ -12,27 +12,24 @@ namespace fs = std::filesystem;
 int crtana_no_time_cut() {
     std::string directory = "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/";
 
-        std::vector<std::string> filenames = {                                                                                          "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13178_crtana.root",                                           //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13476_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13666_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13680_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_crtana_flat.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13828_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13830_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_13689_13690_13693_13758_crtana_flat_etrig.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_crtana.root",
+        std::vector<std::string> filenames = {                                                                                          "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13178_crtana.root",                                           "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13476_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13666_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13680_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13828_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13830_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_crtana.root",
                 "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_fixed_channel_map_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13281_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana_all.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_run13666_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13320_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_13689_13690_13693_13758_crtana_flat.root"
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_fixed_channel_map_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13281_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana_all.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_run13666_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13320_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana.root"
                 };
 
 
@@ -44,6 +41,9 @@ int crtana_no_time_cut() {
     }
 
     Long64_t n_entries = chain.GetEntries();
+
+        
+    std::cout << "Number of entries in the TChain: " << n_entries << std::endl;
 
     if (n_entries == 0) {
         std::cerr << "No entries found in the TChain. Please check the filenames and tree names." << std::endl;
@@ -103,7 +103,7 @@ int crtana_no_time_cut() {
     for (Long64_t i = 0; i < n_entries; ++i) {
         chain.GetEntry(i);
 
-        if ((i % 1000) == 0) {
+        if ((i % 10000) == 0) {
             std::cout << i << "k" << std::endl;
         }
 
@@ -194,29 +194,29 @@ int crtana_no_time_cut() {
 	histogram3_d->Draw("COLZ");
 
 
-	c1_f->SaveAs("Front_face_x.png");
-	c2_f->SaveAs("Front_face_y.png");
-	c3_f->SaveAs("Front_face.png");
+	c1_f->SaveAs("Front_face_x_all.png");
+	c2_f->SaveAs("Front_face_y_all.png");
+	c3_f->SaveAs("Front_face_all.png");
 
-	c1_b->SaveAs("Back_face_x.png");
-	c2_b->SaveAs("Back_face_y.png");
-	c3_b->SaveAs("Back_face.png");
+	c1_b->SaveAs("Back_face_x_all.png");
+	c2_b->SaveAs("Back_face_y_all.png");
+	c3_b->SaveAs("Back_face_all.png");
 
-	c1_l->SaveAs("Left_face_y.png");
-	c2_l->SaveAs("Left_face_z.png");
-	c3_l->SaveAs("Left_face.png");
+	c1_l->SaveAs("Left_face_y_all.png");
+	c2_l->SaveAs("Left_face_z_all.png");
+	c3_l->SaveAs("Left_face_all.png");
 
-	c1_r->SaveAs("Right_face_y.png");
-	c2_r->SaveAs("Right_face_z.png");
-	c3_r->SaveAs("Right_face.png");
+	c1_r->SaveAs("Right_face_y_all.png");
+	c2_r->SaveAs("Right_face_z_all.png");
+	c3_r->SaveAs("Right_face_all.png");
 
-	c1_t->SaveAs("Top_face_x.png");
-	c2_t->SaveAs("Top_face_y.png");
-	c3_t->SaveAs("Top_face.png");
+	c1_t->SaveAs("Top_face_x_all.png");
+	c2_t->SaveAs("Top_face_y_all.png");
+	c3_t->SaveAs("Top_face_all.png");
 
-	c1_d->SaveAs("Bottom_face_x.png");
-	c2_d->SaveAs("Bottom_face_y.png");
-	c3_d->SaveAs("Bottom_face.png");
+	c1_d->SaveAs("Bottom_face_x_all.png");
+	c2_d->SaveAs("Bottom_face_y_all.png");
+	c3_d->SaveAs("Bottom_face_all.png");
 	
 	return 0;
 	}
