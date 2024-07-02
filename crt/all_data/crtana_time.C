@@ -27,26 +27,23 @@ int crtana_time() {
         std::vector<std::string> filenames = {
         "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13178_crtana.root",
         "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_crtana.root",
-        // "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13476_crtana.root",
+        "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13476_crtana.root",
         "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13666_crtana.root",
-        //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13680_crtana.root",
-        //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana.root",
-        //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana.root",
-        //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_crtana_flat.root",
-        //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13828_crtana.root",
-        //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana.root",
-        //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13830_crtana.root",
-        //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_13689_13690_13693_13758_crtana_flat_etrig.root",
-        //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana.root",
-        //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_crtana.root",
-        //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_crtana.root",
-        //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_fixed_channel_map_crtana.root",
-        //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13281_crtana.root",
-        //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana_all.root",
-        //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_run13666_crtana.root",
-        //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13320_crtana.root",
-        //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana.root",
-        //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_13689_13690_13693_13758_crtana_flat.root                                                       
+        "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13680_crtana.root",
+        "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana.root",
+        "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana.root",
+        "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13828_crtana.root",
+        "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana.root",
+        "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13830_crtana.root",
+        "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana.root",
+        "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_crtana.root",
+        "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_crtana.root",
+        "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_fixed_channel_map_crtana.root",
+        "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13281_crtana.root",
+        "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana_all.root",
+        "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_run13666_crtana.root",
+        "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13320_crtana.root",
+        "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana.root"                                                       
         };
  	TChain chain("crtana/tree");
 
@@ -66,17 +63,6 @@ int crtana_time() {
         std::cerr << "Branch 'cl_sp_ts1' not found in the TChain. Please check the variable name." << std::endl;
         return 1;
     }
-	
-	TCanvas* canvas1 = new TCanvas("canvas1", "Interactive Cut", 800, 600);
-
-    // Draw the cl_sp_ts1 variable from all trees in the chain
-    	chain.Draw("cl_sp_ts1");
-    
-    // Update the canvas to display the plot
-    	canvas1->Update();
- 
-        canvas1->SaveAs("cl_sp_ts1_plot.png");
-        
 	TH1D* histogram_t_t = new TH1D("histogram2D", "Time", 300, 1520e3, 1540e3);
 	
     	std::vector<bool>* cl_has_sp = nullptr;
@@ -89,7 +75,7 @@ int crtana_time() {
 
 	for (int i = 0; i < n_entries; ++i) {
         	chain.GetEntry(i);
-        	if ((i % 1000) == 0) {
+        	if ((i % 10000) == 0) {
             		std::cout << i << "k" << std::endl;
         	}
         	if (!cl_has_sp) {
@@ -108,7 +94,8 @@ int crtana_time() {
 	histogram_t_t->Draw();
 	c_t_t->Update();
     	c_t_t->SaveAs("t1.png");	
-	
+	//c_t_t->SaveAs("t1_all.png");	
+
 	return 0;	
 }
 
