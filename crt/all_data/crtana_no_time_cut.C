@@ -103,7 +103,7 @@ int crtana_no_time_cut() {
     for (Long64_t i = 0; i < n_entries; ++i) {
         chain.GetEntry(i);
 
-        if ((i % 10000) == 0) {
+        if ((i % 1000) == 0) {
             std::cout << i << "k" << std::endl;
         }
 
@@ -194,29 +194,29 @@ int crtana_no_time_cut() {
 	histogram3_d->Draw("COLZ");
 
 
-	c1_f->SaveAs("Front_face_x_all.png");
-	c2_f->SaveAs("Front_face_y_all.png");
-	c3_f->SaveAs("Front_face_all.png");
+	c1_f->SaveAs("Front_face_x.png");
+	c2_f->SaveAs("Front_face_y.png");
+	c3_f->SaveAs("Front_face.png");
 
-	c1_b->SaveAs("Back_face_x_all.png");
-	c2_b->SaveAs("Back_face_y_all.png");
-	c3_b->SaveAs("Back_face_all.png");
+	c1_b->SaveAs("Back_face_x.png");
+	c2_b->SaveAs("Back_face_y.png");
+	c3_b->SaveAs("Back_face.png");
 
-	c1_l->SaveAs("Left_face_y_all.png");
-	c2_l->SaveAs("Left_face_z_all.png");
-	c3_l->SaveAs("Left_face_all.png");
+	c1_l->SaveAs("Left_face_y.png");
+	c2_l->SaveAs("Left_face_z.png");
+	c3_l->SaveAs("Left_face.png");
 
-	c1_r->SaveAs("Right_face_y_all.png");
-	c2_r->SaveAs("Right_face_z_all.png");
-	c3_r->SaveAs("Right_face_all.png");
+	c1_r->SaveAs("Right_face_y.png");
+	c2_r->SaveAs("Right_face_z.png");
+	c3_r->SaveAs("Right_face.png");
 
-	c1_t->SaveAs("Top_face_x_all.png");
-	c2_t->SaveAs("Top_face_y_all.png");
-	c3_t->SaveAs("Top_face_all.png");
+	c1_t->SaveAs("Top_face_x.png");
+	c2_t->SaveAs("Top_face_y.png");
+	c3_t->SaveAs("Top_face.png");
 
-	c1_d->SaveAs("Bottom_face_x_all.png");
-	c2_d->SaveAs("Bottom_face_y_all.png");
-	c3_d->SaveAs("Bottom_face_all.png");
+	c1_d->SaveAs("Bottom_face_x.png");
+	c2_d->SaveAs("Bottom_face_y.png");
+	c3_d->SaveAs("Bottom_face.png");
 	
 	return 0;
 	}

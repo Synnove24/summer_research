@@ -124,13 +124,13 @@ int crtana_time_cut() {
     	c3_b_t->SetLogz();
 	histogram3_b_t->Draw("COLZ");
 
-	c1_f_t->SaveAs("Front_face_x_t_all.png");
-	c2_f_t->SaveAs("Front_face_y_t_all.png");
-	c3_f_t->SaveAs("Front_face_t_all.png");
+	c1_f_t->SaveAs("Front_face_x_t.png");
+	c2_f_t->SaveAs("Front_face_y_t.png");
+	c3_f_t->SaveAs("Front_face_t.png");
 
-	c1_b_t->SaveAs("Back_face_x_t_all.png");
-	c2_b_t->SaveAs("Back_face_y_t_all.png");
-	c3_b_t->SaveAs("Back_face_t_all.png");
+	c1_b_t->SaveAs("Back_face_x_t.png");
+	c2_b_t->SaveAs("Back_face_y_t.png");
+	c3_b_t->SaveAs("Back_face_t.png");
 
 	return 0;
 	}
