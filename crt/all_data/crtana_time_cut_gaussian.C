@@ -149,6 +149,21 @@ int crtana_time_cut_gaussian() {
 	double chi_per_deg_f = chi2f / ndff;
 	double chi_per_deg_b = chi2b / ndfb;
 
+	double mean_x2D_f = fit2D_f->GetParameter(1);
+	double stddev_x2D_f = fit2D_f->GetParameter(2);
+	double mean_y2D_f = fit2D_f->GetParameter(3);
+	double stddev_y2D_f = fit2D_f->GetParameter(4);
+
+	double mean_x2D_b = fit2D_b->GetParameter(1);
+	double stddev_x2D_b = fit2D_b->GetParameter(2);
+	double mean_y2D_b = fit2D_b->GetParameter(3);
+	double stddev_y2D_b = fit2D_b->GetParameter(4);
+
+	std::cout << "2D Front X Mean: " << mean_x2D_f << ", 2D Front X StdDev: " << stddev_x2D_f << std::endl;
+	std::cout << "2D Front Y Mean: " << mean_y2D_f << ", 2D Front Y StdDev: " << stddev_y2D_f << std::endl;
+	std::cout << "2D Back X Mean: " << mean_x2D_b << ", 2D Back X StdDev: " << stddev_x2D_b << std::endl;
+	std::cout << "2D Back Y Mean: " << mean_y2D_b << ", 2D Back Y StdDev: " << stddev_y2D_b << std::endl;
+
 	std::cout << "Front Chi-Squared: " << chi2f << std::endl;
 	std::cout << "Front Number Degrees Freedom: " << ndff << std::endl;
 	std::cout << "Front Chi-Squared/Degrees Freedom: " << chi_per_deg_f << std::endl;

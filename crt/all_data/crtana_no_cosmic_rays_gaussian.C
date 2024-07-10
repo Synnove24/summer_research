@@ -203,6 +203,23 @@ int crtana_no_cosmic_rays_gaussian() {
         int ndfb = fit2D_b_neut->GetNDF();
         double chi_per_deg_f = chi2f / ndff;
         double chi_per_deg_b = chi2b / ndfb;
+	double mean_x2D_f_neut = fit2D_f_neut->GetParameter(1);
+	double stddev_x2D_f_neut = fit2D_f_neut->GetParameter(2);
+	double mean_y2D_f_neut = fit2D_f_neut->GetParameter(3);
+	double stddev_y2D_f_neut = fit2D_f_neut->GetParameter(4);
+
+	double mean_x2D_b_neut = fit2D_b_neut->GetParameter(1);
+	double stddev_x2D_b_neut = fit2D_b_neut->GetParameter(2);
+	double mean_y2D_b_neut = fit2D_b_neut->GetParameter(3);
+	double stddev_y2D_b_neut = fit2D_b_neut->GetParameter(4);
+
+	std::cout << "Front X Mean: " << mean_x2D_f_neut << ", Front X StdDev: " << stddev_x2D_f_neut << std::endl;
+	std::cout << "Front Y Mean: " << mean_y2D_f_neut << ", Front Y StdDev: " << stddev_y2D_f_neut << std::endl;
+	std::cout << "Back X Mean: " << mean_x2D_b_neut << ", Back X StdDev: " << stddev_x2D_b_neut << std::endl;
+	std::cout << "Back Y Mean: " << mean_y2D_b_neut << ", Back Y StdDev: " << stddev_y2D_b_neut << std::endl;
+
+
+
 
         std::cout << "Front Chi-Squared: " << chi2f << std::endl;
         std::cout << "Front Number Degrees Freedom: " << ndff << std::endl;
