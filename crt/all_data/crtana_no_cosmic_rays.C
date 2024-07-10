@@ -6,6 +6,8 @@
 #include <string>
 #include <vector>
 #include <TChain.h>
+#include <TStyle.h>
+#include <TMath.h>
 
 namespace fs = std::filesystem;
 
@@ -13,25 +15,25 @@ int crtana_no_cosmic_rays() {
     std::string directory = "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/";
 
         std::vector<std::string> filenames = {       
-		"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13178_crtana.root",
-		"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13476_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13666_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13680_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana.root", 
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13828_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13830_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_crtana.root",
+		//"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13178_crtana.root",
+		//"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13476_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13666_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13680_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana.root", 
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13828_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13830_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_crtana.root",
                 "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_fixed_channel_map_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13281_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana_all.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_run13666_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13320_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana.root"
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_fixed_channel_map_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13281_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana_all.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_run13666_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13320_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana.root"
                                };
 
 
@@ -164,27 +166,55 @@ int crtana_no_cosmic_rays() {
         histogram3_b_neut->Add(histogram3_b_n, -1);
 
 
+        gStyle->SetOptStat(0);
+        double entriesf = histogram3_f_neut->GetEntries();
+        std::cout << "Front entries: " << entriesf << std::endl;
+        double entriesb = histogram3_b_neut->GetEntries();
+        std::cout << "Back entries: " << entriesb << std::endl;
 
-    	c1_f_nocr->cd();
-    	histogram1_f_neut->Draw("HIST");
-    	c2_f_nocr->cd();
-    	histogram2_f_neut->Draw("HIST");
-    	c3_f_nocr->cd();
+	c1_f_nocr->cd();
+	histogram1_f_neut->GetXaxis()->SetTitle("X (cm)");
+	histogram1_f_neut->GetYaxis()->SetTitle("Number of Hits");
+	histogram1_f_neut->Draw("HIST");
+
+	c2_f_nocr->cd();
+	histogram2_f_neut->GetXaxis()->SetTitle("Y (cm)");
+	histogram2_f_neut->GetYaxis()->SetTitle("Number of Hits");
+	histogram2_f_neut->Draw("HIST");
+
+	c3_f_nocr->cd();
 	c3_f_nocr->SetLogz();
-    	histogram3_f_neut->Draw("COLZ");
+	histogram3_f_neut->GetXaxis()->SetTitle("X (cm)");
+	histogram3_f_neut->GetYaxis()->SetTitle("Y (cm)");
+	histogram3_f_neut->Draw("COLZ");
 
-    	c1_b_nocr->cd();
-    	histogram1_b_neut->Draw("HIST");
-    	c2_b_nocr->cd();
-    	histogram2_b_neut->Draw("HIST");
-    	c3_b_nocr->cd();
-    	c3_b_nocr->SetLogz();
+	c1_b_nocr->cd();
+	histogram1_b_neut->GetXaxis()->SetTitle("X (cm)");
+	histogram1_b_neut->GetYaxis()->SetTitle("Number of Hits");
+	histogram1_b_neut->Draw("HIST");
+
+	c2_b_nocr->cd();
+	histogram2_b_neut->GetXaxis()->SetTitle("Y (cm)");
+	histogram2_b_neut->GetYaxis()->SetTitle("Number of Hits");
+	histogram2_b_neut->Draw("HIST");
+
+	c3_b_nocr->cd();
+	c3_b_nocr->SetLogz();
+	histogram3_b_neut->GetXaxis()->SetTitle("X (cm)");
+	histogram3_b_neut->GetYaxis()->SetTitle("Y (cm)");
 	histogram3_b_neut->Draw("COLZ");
 
+
+
 	c3_f_n->cd();
-	histogram3_f_n->Draw("COLZ");
+        histogram3_f_n->GetXaxis()->SetTitle("X (cm)");
+        histogram3_f_n->GetYaxis()->SetTitle("Y (cm)");
+        histogram3_f_n->Draw("COLZ");
 	c3_b_n->cd();
+        histogram3_b_n->GetXaxis()->SetTitle("X (cm)");
+        histogram3_b_n->GetYaxis()->SetTitle("Y (cm)");
 	histogram3_b_n->Draw("COLZ");
+
 
 	c3_f_n->SaveAs("Front_face_cosmic_rays");
 	c3_b_n->SaveAs("Back_face_cosmic_rays");

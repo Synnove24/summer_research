@@ -11,6 +11,8 @@
 #include <algorithm>
 #include "TPaveText.h"
 #include "TF2.h"
+#include <TStyle.h>
+#include <TMath.h>
 
 namespace fs = std::filesystem;
 
@@ -224,34 +226,61 @@ int crtana_no_cosmic_rays_gaussian() {
         //ptb->SetFillColor(0);
         //ptb->SetTextColor(kRed);
 	
+        gStyle->SetOptStat(0);
+        double entriesf = histogram3_f_neut->GetEntries();
+        std::cout << "Front entries: " << entriesf << std::endl;
+        double entriesb = histogram3_b_neut->GetEntries();
+        std::cout << "Back entries: " << entriesb << std::endl;
+
 	c1_f_nocr->cd();
-    	histogram1_f_neut->Draw("HIST");
-        fit1D_x_f_neut->Draw("same");
-    	c2_f_nocr->cd();
-    	histogram2_f_neut->Draw("HIST");
-        fit1D_y_f_neut->Draw("same");
-    	c3_f_nocr->cd();
+	histogram1_f_neut->GetXaxis()->SetTitle("X (cm)");
+	histogram1_f_neut->GetYaxis()->SetTitle("Number of Hits");
+	histogram1_f_neut->Draw("HIST");
+	fit1D_x_f_neut->Draw("same");
+
+	c2_f_nocr->cd();
+	histogram2_f_neut->GetXaxis()->SetTitle("Y (cm)");
+	histogram2_f_neut->GetYaxis()->SetTitle("Number of Hits");
+	histogram2_f_neut->Draw("HIST");
+	fit1D_y_f_neut->Draw("same");
+
+	c3_f_nocr->cd();
 	//c3_f_nocr->SetLogz();
-    	histogram3_f_neut->Draw("COLZ");
-        fit2D_f_neut->Draw("CONT3 SAME");
+	histogram3_f_neut->GetXaxis()->SetTitle("X (cm)");
+	histogram3_f_neut->GetYaxis()->SetTitle("Y (cm)");
+	histogram3_f_neut->Draw("COLZ");
+	fit2D_f_neut->Draw("CONT3 SAME");
 	//ptf->Draw();
 
-    	c1_b_nocr->cd();
-    	histogram1_b_neut->Draw("HIST");
-        fit1D_x_b_neut->Draw("same");
-    	c2_b_nocr->cd();
-    	histogram2_b_neut->Draw("HIST");
-        fit1D_y_b_neut->Draw("same");
-    	c3_b_nocr->cd();
-    	//c3_b_nocr->SetLogz();
+	c1_b_nocr->cd();
+	histogram1_b_neut->GetXaxis()->SetTitle("X (cm)");
+	histogram1_b_neut->GetYaxis()->SetTitle("Number of Hits");
+	histogram1_b_neut->Draw("HIST");
+	fit1D_x_b_neut->Draw("same");
+
+	c2_b_nocr->cd();
+	histogram2_b_neut->GetXaxis()->SetTitle("Y (cm)");
+	histogram2_b_neut->GetYaxis()->SetTitle("Number of Hits");
+	histogram2_b_neut->Draw("HIST");
+	fit1D_y_b_neut->Draw("same");
+
+	c3_b_nocr->cd();
+	//c3_b_nocr->SetLogz();
+	histogram3_b_neut->GetXaxis()->SetTitle("X (cm)");
+	histogram3_b_neut->GetYaxis()->SetTitle("Y (cm)");
 	histogram3_b_neut->Draw("COLZ");
-        fit2D_b_neut->Draw("CONT3 SAME");
+	fit2D_b_neut->Draw("CONT3 SAME");
 	//ptb->Draw();
 
 
+
 	c3_f_n->cd();
+        histogram3_f_n->GetXaxis()->SetTitle("X (cm)");
+        histogram3_f_n->GetYaxis()->SetTitle("Y (cm)");
 	histogram3_f_n->Draw("COLZ");
 	c3_b_n->cd();
+        histogram3_b_n->GetXaxis()->SetTitle("X (cm)");
+        histogram3_b_n->GetYaxis()->SetTitle("Y (cm)");
 	histogram3_b_n->Draw("COLZ");
 
 	c3_f_n->SaveAs("Front_face_cosmic_rays_fitted");

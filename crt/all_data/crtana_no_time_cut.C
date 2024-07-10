@@ -6,30 +6,34 @@
 #include <string>
 #include <vector>
 #include <TChain.h>
+#include <TStyle.h>
+#include <TMath.h>
 
 namespace fs = std::filesystem;
 
 int crtana_no_time_cut() {
     std::string directory = "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/";
 
-        std::vector<std::string> filenames = {                                                                                          "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13178_crtana.root",                                           "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13476_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13666_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13680_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13828_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13830_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_crtana.root",
+        std::vector<std::string> filenames = {                           
+		//"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13178_crtana.root",                     
+		//"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13476_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13666_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13680_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13828_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13830_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_crtana.root",
                 "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_fixed_channel_map_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13281_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana_all.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_run13666_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13320_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana.root"
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_fixed_channel_map_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13281_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana_all.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_run13666_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13320_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana.root"
                 };
 
 
@@ -145,53 +149,117 @@ int crtana_no_time_cut() {
         }
     }
 
-    	c1_f->cd();
-    	histogram1_f->Draw();
-    	c2_f->cd();
-    	histogram2_f->Draw();
-    	c3_f->cd();
-	c3_f->SetLogz();
-    	histogram3_f->Draw("COLZ");
+        gStyle->SetOptStat(0);
+        double entriesf = histogram3_f->GetEntries();
+        std::cout << "Front entries: " << entriesf << std::endl;
+        double entriesb = histogram3_b->GetEntries();
+        std::cout << "Back entries: " << entriesb << std::endl;
+        double entriesl = histogram3_l->GetEntries();
+        std::cout << "Left entries: " << entriesl << std::endl;
+        double entriesr = histogram3_r->GetEntries();
+        std::cout << "Right entries: " << entriesr << std::endl;
+        double entriest = histogram3_t->GetEntries();
+        std::cout << "Top entries: " << entriest << std::endl;
+        double entriesd = histogram3_d->GetEntries();
+        std::cout << "Bottom entries: " << entriesd << std::endl;
 
-    	c1_b->cd();
-    	histogram1_b->Draw();
-    	c2_b->cd();
-    	histogram2_b->Draw();
-    	c3_b->cd();
-    	c3_b->SetLogz();
+	c1_f->cd();
+	histogram1_f->GetXaxis()->SetTitle("X (cm)");
+	histogram1_f->GetYaxis()->SetTitle("Number of Hits");
+	histogram1_f->Draw();
+
+	c2_f->cd();
+	histogram2_f->GetXaxis()->SetTitle("Y (cm)");
+	histogram2_f->GetYaxis()->SetTitle("Number of Hits");
+	histogram2_f->Draw();
+
+	c3_f->cd();
+	c3_f->SetLogz();
+	histogram3_f->GetXaxis()->SetTitle("X (cm)");
+	histogram3_f->GetYaxis()->SetTitle("Y (cm)");
+	histogram3_f->Draw("COLZ");
+
+	c1_b->cd();
+	histogram1_b->GetXaxis()->SetTitle("X (cm)");
+	histogram1_b->GetYaxis()->SetTitle("Number of Hits");
+	histogram1_b->Draw();
+
+	c2_b->cd();
+	histogram2_b->GetXaxis()->SetTitle("Y (cm)");
+	histogram2_b->GetYaxis()->SetTitle("Number of Hits");
+	histogram2_b->Draw();
+
+	c3_b->cd();
+	c3_b->SetLogz();
+	histogram3_b->GetXaxis()->SetTitle("X (cm)");
+	histogram3_b->GetYaxis()->SetTitle("Y (cm)");
 	histogram3_b->Draw("COLZ");
 
-    	c1_l->cd();
-   	histogram1_l->Draw();
-    	c2_l->cd();
-   	histogram2_l->Draw();
-    	c3_l->cd();
-    	c3_l->SetLogz();
+	c1_l->cd();
+	histogram1_l->GetXaxis()->SetTitle("X (cm)");
+	histogram1_l->GetYaxis()->SetTitle("Number of Hits");
+	histogram1_l->Draw();
+
+	c2_l->cd();
+	histogram2_l->GetXaxis()->SetTitle("Y (cm)");
+	histogram2_l->GetYaxis()->SetTitle("Number of Hits");
+	histogram2_l->Draw();
+
+	c3_l->cd();
+	c3_l->SetLogz();
+	histogram3_l->GetXaxis()->SetTitle("X (cm)");
+	histogram3_l->GetYaxis()->SetTitle("Y (cm)");
 	histogram3_l->Draw("COLZ");
 
 	c1_r->cd();
+	histogram1_r->GetXaxis()->SetTitle("X (cm)");
+	histogram1_r->GetYaxis()->SetTitle("Number of Hits");
 	histogram1_r->Draw();
+
 	c2_r->cd();
+	histogram2_r->GetXaxis()->SetTitle("Y (cm)");
+	histogram2_r->GetYaxis()->SetTitle("Number of Hits");
 	histogram2_r->Draw();
+
 	c3_r->cd();
 	c3_r->SetLogz();
+	histogram3_r->GetXaxis()->SetTitle("X (cm)");
+	histogram3_r->GetYaxis()->SetTitle("Y (cm)");
 	histogram3_r->Draw("COLZ");
 
 	c1_t->cd();
+	histogram1_t->GetXaxis()->SetTitle("X (cm)");
+	histogram1_t->GetYaxis()->SetTitle("Number of Hits");
 	histogram1_t->Draw();
+
 	c2_t->cd();
+	histogram2_t->GetXaxis()->SetTitle("Y (cm)");
+	histogram2_t->GetYaxis()->SetTitle("Number of Hits");
 	histogram2_t->Draw();
+
 	c3_t->cd();
 	c3_t->SetLogz();
+	histogram3_t->GetXaxis()->SetTitle("X (cm)");
+	histogram3_t->GetYaxis()->SetTitle("Y (cm)");
 	histogram3_t->Draw("COLZ");
 
 	c1_d->cd();
+	histogram1_d->GetXaxis()->SetTitle("X (cm)");
+	histogram1_d->GetYaxis()->SetTitle("Number of Hits");
 	histogram1_d->Draw();
+
 	c2_d->cd();
+	histogram2_d->GetXaxis()->SetTitle("Y (cm)");
+	histogram2_d->GetYaxis()->SetTitle("Number of Hits");
 	histogram2_d->Draw();
+
 	c3_d->cd();
 	c3_d->SetLogz();
+	histogram3_d->GetXaxis()->SetTitle("X (cm)");
+	histogram3_d->GetYaxis()->SetTitle("Y (cm)");
 	histogram3_d->Draw("COLZ");
+
+
 
 
 	c1_f->SaveAs("Front_face_x.png");

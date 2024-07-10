@@ -6,13 +6,17 @@
 #include <string>
 #include <vector>
 #include <TChain.h>
+#include <TStyle.h>
+#include <TMath.h>
 
 namespace fs = std::filesystem;
 
 int crtana_time_cut() {
     std::string directory = "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/";
 
-        std::vector<std::string> filenames = {                                                                                          "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13178_crtana.root",                                           "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_crtana.root",
+        std::vector<std::string> filenames = {                                             
+		"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13178_crtana.root",                
+		"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_crtana.root",
                 "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13476_crtana.root",
                 "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13666_crtana.root",
                 "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13680_crtana.root",
@@ -108,29 +112,47 @@ int crtana_time_cut() {
        	 	}
     	}
 
+        gStyle->SetOptStat(0);
+        double entriesf = histogram3_f_t->GetEntries();
+        std::cout << "Front entries: " << entriesf << std::endl;
+        double entriesb = histogram3_b_t->GetEntries();
+        std::cout << "Back entries: " << entriesb << std::endl;
+
     	c1_f_t->cd();
+        histogram1_f_t->GetXaxis()->SetTitle("X (cm)");
+        histogram1_f_t->GetYaxis()->SetTitle("Number of Hits");
     	histogram1_f_t->Draw();
     	c2_f_t->cd();
+        histogram2_f_t->GetXaxis()->SetTitle("Y (cm)");
+        histogram2_f_t->GetYaxis()->SetTitle("Number of Hits");
     	histogram2_f_t->Draw();
     	c3_f_t->cd();
+        histogram3_f_t->GetXaxis()->SetTitle("X (cm)");
+        histogram3_f_t->GetYaxis()->SetTitle("Y (cm)");
 	c3_f_t->SetLogz();
     	histogram3_f_t->Draw("COLZ");
 
     	c1_b_t->cd();
+	histogram1_b_t->GetXaxis()->SetTitle("X (cm)");
+        histogram1_b_t->GetYaxis()->SetTitle("Number of Hits");
     	histogram1_b_t->Draw();
     	c2_b_t->cd();
+        histogram2_b_t->GetXaxis()->SetTitle("Y (cm)");
+        histogram2_b_t->GetYaxis()->SetTitle("Number of Hits");
     	histogram2_b_t->Draw();
     	c3_b_t->cd();
+        histogram3_b_t->GetXaxis()->SetTitle("X (cm)");
+        histogram3_b_t->GetYaxis()->SetTitle("Y (cm)");
     	c3_b_t->SetLogz();
 	histogram3_b_t->Draw("COLZ");
 
-	c1_f_t->SaveAs("Front_face_x_t.png");
-	c2_f_t->SaveAs("Front_face_y_t.png");
-	c3_f_t->SaveAs("Front_face_t.png");
+	c1_f_t->SaveAs("Front_face_x_time_cut_all.png");
+	c2_f_t->SaveAs("Front_face_y_time_cut_all.png");
+	c3_f_t->SaveAs("Front_face_time_cut_all.png");
 
-	c1_b_t->SaveAs("Back_face_x_t.png");
-	c2_b_t->SaveAs("Back_face_y_t.png");
-	c3_b_t->SaveAs("Back_face_t.png");
+	c1_b_t->SaveAs("Back_face_x_time_cut_all.png");
+	c2_b_t->SaveAs("Back_face_y_time_cut_all.png");
+	c3_b_t->SaveAs("Back_face_time_cut_all.png");
 
 	return 0;
 	}
