@@ -9,6 +9,8 @@
 #include <TF1.h>
 #include <TF2.h>
 #include "TPaveText.h"
+#include <TStyle.h>
+#include <TMath.h>
 
 namespace fs = std::filesystem;
 
@@ -167,32 +169,57 @@ int crtana_time_cut_gaussian() {
 	//ptb->AddText(Form("Chi2/NDF: %.2f", chi2b/ndfb));
 	//ptb->SetFillColor(0);
 	//ptb->SetTextColor(kRed);
+	
+	gStyle->SetOptStat(0);
+        double entriesf = histogram3_f_t_f->GetEntries();
+        std::cout << "Front entries: " << entriesf << std::endl;
+        double entriesb = histogram3_b_t_f->GetEntries();
+        std::cout << "Back entries: " << entriesb << std::endl;
 
-    	c1_f_t_f->cd();
-    	histogram1_f_t_f->Draw();
+
+	c1_f_t_f->cd();
+	histogram1_f_t_f->GetXaxis()->SetTitle("X (cm)");
+	histogram1_f_t_f->GetYaxis()->SetTitle("Number of Hits");
+	histogram1_f_t_f->Draw();
 	fit1D_x_f->Draw("same");
-    	c2_f_t_f->cd();
-    	histogram2_f_t_f->Draw();
+
+	c2_f_t_f->cd();
+	histogram2_f_t_f->GetXaxis()->SetTitle("Y (cm)");
+	histogram2_f_t_f->GetYaxis()->SetTitle("Number of Hits");
+	histogram2_f_t_f->Draw();
 	fit1D_y_f->Draw("same");
-    	c3_f_t_f->cd();
-	c3_f_t_f->SetLogz();
-    	histogram3_f_t_f->Draw("COLZ");
+
+	c3_f_t_f->cd();
+	//c3_f_t_f->SetLogz();
+	histogram3_f_t_f->GetXaxis()->SetTitle("X (cm)");
+	histogram3_f_t_f->GetYaxis()->SetTitle("Y (cm)");
+	histogram3_f_t_f->Draw("COLZ");
 	fit2D_f->Draw("same CONT3");
 	//ptf->Draw();
 
-    	c1_b_t_f->cd();
-    	histogram1_b_t_f->Draw();
+	c1_b_t_f->cd();
+	histogram1_b_t_f->GetXaxis()->SetTitle("X (cm)");
+	histogram1_b_t_f->GetYaxis()->SetTitle("Number of Hits");
+	histogram1_b_t_f->Draw();
 	fit1D_x_b->Draw("same");
-    	c2_b_t_f->cd();
-    	histogram2_b_t_f->Draw();
+
+	c2_b_t_f->cd();
+	histogram2_b_t_f->GetXaxis()->SetTitle("Y (cm)");
+	histogram2_b_t_f->GetYaxis()->SetTitle("Number of Hits");
+	histogram2_b_t_f->Draw();
 	fit1D_y_b->Draw("same");
-    	c3_b_t_f->cd();
-    	c3_b_t_f->SetLogz();
+
+	c3_b_t_f->cd();
+	//c3_b_t_f->SetLogz();
+	histogram3_b_t_f->GetXaxis()->SetTitle("X (cm)");
+	histogram3_b_t_f->GetYaxis()->SetTitle("Y (cm)");
 	histogram3_b_t_f->Draw("COLZ");
 	fit2D_b->Draw("same CONT3");
 	//ptb->Draw();
 
-	c1_f_t_f->SaveAs("Front_face_x_t_f.png");
+
+
+    	c1_f_t_f->SaveAs("Front_face_x_t_f.png");
 	c2_f_t_f->SaveAs("Front_face_y_t_f.png");
 	c3_f_t_f->SaveAs("Front_face_t_f.png");
 
