@@ -8,7 +8,7 @@
 #include <TChain.h>
 #include <TF1.h>
 #include <TF2.h>
-
+#include "TPaveText.h"
 
 namespace fs = std::filesystem;
 
@@ -16,25 +16,25 @@ int crtana_time_cut_gaussian() {
     std::string directory = "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/";
 
         std::vector<std::string> filenames = {                                          
-		"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13178_crtana.root",  
-		"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_crtana.root",
-		"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13476_crtana.root",                
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13666_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13680_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana.root", 
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13828_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13830_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_crtana.root",
+		//"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13178_crtana.root",  
+		//"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_crtana.root",
+		//"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13476_crtana.root",                
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13666_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13680_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana.root", 
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13828_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13830_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_crtana.root",
                 "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_crtana.root",
-               	"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_fixed_channel_map_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13281_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana_all.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_run13666_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13320_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana.root"
+               	//"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_fixed_channel_map_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13281_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana_all.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_run13666_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13320_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana.root"
                                 };
 	 
 
@@ -121,8 +121,8 @@ int crtana_time_cut_gaussian() {
 	TF1* fit1D_y_f = new TF1("fit1D_y_f", "gaus", -350, 400);
 	TF1* fit1D_x_b = new TF1("fit1D_x_b", "gaus", -400, 400);  
 	TF1* fit1D_y_b = new TF1("fit1D_y_b", "gaus", -350, 400);
-	TF2* fit2D_f = new TF2("fit2D_f", "[0]*exp(-0.5*((x-[1])*(x-[1])/([2]*[2]) + (y-[3])*(y-[3])/([4]*[4])))", -400, 400, -200, 800);
-    	TF2* fit2D_b = new TF2("fit2D_b", "[0]*exp(-0.5*((x-[1])*(x-[1])/([2]*[2]) + (y-[3])*(y-[3])/([4]*[4])))", -400, 400, -200, 800);
+	TF2* fit2D_f = new TF2("fit2D_f", "[0]*exp(-0.5*((x-[1])*(x-[1])/([2]*[2]) + (y-[3])*(y-[3])/([4]*[4])))", -400, 400, -400, 400);
+    	TF2* fit2D_b = new TF2("fit2D_b", "[0]*exp(-0.5*((x-[1])*(x-[1])/([2]*[2]) + (y-[3])*(y-[3])/([4]*[4])))", -400, 400, -400, 400);
 
 	fit2D_f->SetParameters(1,0,100,0,100);
 	fit2D_b->SetParameters(1,0,100,0,100);
@@ -140,6 +140,34 @@ int crtana_time_cut_gaussian() {
     	std::cout << "Fit parameters for Back face (2D): " << std::endl;
     	fit2D_b->Print();
 
+        double chi2f = fit2D_f->GetChisquare();
+        int ndff = fit2D_f->GetNDF();
+        double chi2b = fit2D_b->GetChisquare();
+        int ndfb = fit2D_b->GetNDF();
+	double chi_per_deg_f = chi2f / ndff;
+	double chi_per_deg_b = chi2b / ndfb;
+
+	std::cout << "Front Chi-Squared: " << chi2f << std::endl;
+	std::cout << "Front Number Degrees Freedom: " << ndff << std::endl;
+	std::cout << "Front Chi-Squared/Degrees Freedom: " << chi_per_deg_f << std::endl;
+	std::cout << "Back Chi-Squared: " << chi2b << std::endl;
+	std::cout << "Back Number Degrees Freedom: " << ndfb << std::endl;
+	std::cout << "Back Chi-Squared/Degrees Freedom: " << chi_per_deg_b << std::endl;
+
+	//TPaveText *ptf = new TPaveText(0.7, 0.7, 0.9, 0.9, "NDC");
+	//ptf->AddText(Form("Chi2: %.2f", chi2f));
+	//ptf->AddText(Form("NDF: %d", ndff));
+	//ptf->AddText(Form("Chi2/NDF: %.2f", chi2f/ndff));
+	//ptf->SetFillColor(0);
+	//ptf->SetTextColor(kRed);
+
+	//TPaveText *ptb = new TPaveText(0.7, 0.7, 0.9, 0.9, "NDC");
+	//ptb->AddText(Form("Chi2: %.2f", chi2b));
+	//ptb->AddText(Form("NDF: %d", ndfb));
+	//ptb->AddText(Form("Chi2/NDF: %.2f", chi2b/ndfb));
+	//ptb->SetFillColor(0);
+	//ptb->SetTextColor(kRed);
+
     	c1_f_t_f->cd();
     	histogram1_f_t_f->Draw();
 	fit1D_x_f->Draw("same");
@@ -150,6 +178,7 @@ int crtana_time_cut_gaussian() {
 	c3_f_t_f->SetLogz();
     	histogram3_f_t_f->Draw("COLZ");
 	fit2D_f->Draw("same CONT3");
+	//ptf->Draw();
 
     	c1_b_t_f->cd();
     	histogram1_b_t_f->Draw();
@@ -161,14 +190,15 @@ int crtana_time_cut_gaussian() {
     	c3_b_t_f->SetLogz();
 	histogram3_b_t_f->Draw("COLZ");
 	fit2D_b->Draw("same CONT3");
+	//ptb->Draw();
 
-	c1_f_t_f->SaveAs("Front_face_x_t_f_all.png");
-	c2_f_t_f->SaveAs("Front_face_y_t_f_all.png");
-	c3_f_t_f->SaveAs("Front_face_t_f_all.png");
+	c1_f_t_f->SaveAs("Front_face_x_t_f.png");
+	c2_f_t_f->SaveAs("Front_face_y_t_f.png");
+	c3_f_t_f->SaveAs("Front_face_t_f.png");
 
-	c1_b_t_f->SaveAs("Back_face_x_t_f_all.png");
-	c2_b_t_f->SaveAs("Back_face_y_t_f_all.png");
-	c3_b_t_f->SaveAs("Back_face_t_f_all.png");
+	c1_b_t_f->SaveAs("Back_face_x_t_f.png");
+	c2_b_t_f->SaveAs("Back_face_y_t_f.png");
+	c3_b_t_f->SaveAs("Back_face_t_f.png");
 
 	return 0;
 	}
