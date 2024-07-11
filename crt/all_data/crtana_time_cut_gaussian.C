@@ -18,25 +18,25 @@ int crtana_time_cut_gaussian() {
     std::string directory = "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/";
 
         std::vector<std::string> filenames = {                                          
-		//"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13178_crtana.root",  
-		//"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_crtana.root",
-		//"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13476_crtana.root",                
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13666_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13680_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana.root", 
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13828_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13830_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_crtana.root",
+		"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13178_crtana.root",  
+		"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_crtana.root",
+		"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13476_crtana.root",                
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13666_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13680_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana.root", 
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13828_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13830_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_crtana.root",
                 "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_crtana.root",
-               	//"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_fixed_channel_map_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13281_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana_all.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_run13666_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13320_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana.root"
+               	"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_fixed_channel_map_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13281_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana_all.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_run13666_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13320_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana.root"
                                 };
 	 
 
@@ -131,12 +131,12 @@ int crtana_time_cut_gaussian() {
 
    	histogram1_f_t_f->Fit("fit1D_x_f");
    	histogram2_f_t_f->Fit("fit1D_y_f");
-    	histogram3_f_t_f->Fit("fit2D_f");
+    	histogram3_f_t_f->Fit("fit2D_f", "N");
   	histogram1_b_t_f->Fit("fit1D_x_b");
     	histogram2_b_t_f->Fit("fit1D_y_b");
- 	histogram3_b_t_f->Fit("fit2D_b");
+ 	histogram3_b_t_f->Fit("fit2D_b", "N");
 
-    	std::cout << "Fit parameters for Front face (2D): " << std::endl;
+	std::cout << "Fit parameters for Front face (2D): " << std::endl;
     	fit2D_f->Print();
 
     	std::cout << "Fit parameters for Back face (2D): " << std::endl;
@@ -171,27 +171,27 @@ int crtana_time_cut_gaussian() {
 	std::cout << "Back Number Degrees Freedom: " << ndfb << std::endl;
 	std::cout << "Back Chi-Squared/Degrees Freedom: " << chi_per_deg_b << std::endl;
 
-	//TPaveText *ptf = new TPaveText(0.7, 0.7, 0.9, 0.9, "NDC");
-	//ptf->AddText(Form("Chi2: %.2f", chi2f));
-	//ptf->AddText(Form("NDF: %d", ndff));
-	//ptf->AddText(Form("Chi2/NDF: %.2f", chi2f/ndff));
-	//ptf->SetFillColor(0);
-	//ptf->SetTextColor(kRed);
 
-	//TPaveText *ptb = new TPaveText(0.7, 0.7, 0.9, 0.9, "NDC");
-	//ptb->AddText(Form("Chi2: %.2f", chi2b));
-	//ptb->AddText(Form("NDF: %d", ndfb));
-	//ptb->AddText(Form("Chi2/NDF: %.2f", chi2b/ndfb));
-	//ptb->SetFillColor(0);
-	//ptb->SetTextColor(kRed);
-	
 	gStyle->SetOptStat(0);
         double entriesf = histogram3_f_t_f->GetEntries();
         std::cout << "Front entries: " << entriesf << std::endl;
         double entriesb = histogram3_b_t_f->GetEntries();
         std::cout << "Back entries: " << entriesb << std::endl;
 
+	
 
+
+	const int nContours = 1;
+	double sigma1_f = fit2D_f->GetParameter(0) * exp(-0.5);
+	double sigma1_b = fit2D_b->GetParameter(0) * exp(-0.5);
+
+	double contours_f[nContours] = {sigma1_f};
+	double contours_b[nContours] = {sigma1_b};
+
+	fit2D_f->SetContour(nContours, contours_f);
+	fit2D_b->SetContour(nContours, contours_b);
+
+	
 	c1_f_t_f->cd();
 	histogram1_f_t_f->GetXaxis()->SetTitle("X (cm)");
 	histogram1_f_t_f->GetYaxis()->SetTitle("Number of Hits");
@@ -234,13 +234,13 @@ int crtana_time_cut_gaussian() {
 
 
 
-    	c1_f_t_f->SaveAs("Front_face_x_t_f.png");
-	c2_f_t_f->SaveAs("Front_face_y_t_f.png");
-	c3_f_t_f->SaveAs("Front_face_t_f.png");
+    	c1_f_t_f->SaveAs("Front_face_x_time_cut_gaussian_all.png");
+	c2_f_t_f->SaveAs("Front_face_y_time_cut_gaussian_all.png");
+	c3_f_t_f->SaveAs("Front_face_time_cut_gaussian_all.png");
 
-	c1_b_t_f->SaveAs("Back_face_x_t_f.png");
-	c2_b_t_f->SaveAs("Back_face_y_t_f.png");
-	c3_b_t_f->SaveAs("Back_face_t_f.png");
+	c1_b_t_f->SaveAs("Back_face_x_time_cut_gaussian_all.png");
+	c2_b_t_f->SaveAs("Back_face_y_time_cut_gaussian_all.png");
+	c3_b_t_f->SaveAs("Back_face_time_cut_gaussian_all.png");
 
 	return 0;
 	}

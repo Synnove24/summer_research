@@ -15,25 +15,25 @@ int crtana_no_time_cut() {
     std::string directory = "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/";
 
         std::vector<std::string> filenames = {                           
-		//"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13178_crtana.root",                     
-		//"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13476_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13666_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13680_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13828_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13830_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_crtana.root",
+		"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13178_crtana.root",                     
+		"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13476_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13666_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13680_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13828_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13830_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_crtana.root",
                 "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_fixed_channel_map_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13281_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana_all.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_run13666_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13320_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana.root"
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_fixed_channel_map_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13281_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana_all.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_run13666_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13320_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana.root"
                 };
 
 
@@ -66,24 +66,24 @@ int crtana_no_time_cut() {
     chain.SetBranchAddress("cl_sp_z", &cl_sp_z);
     chain.SetBranchAddress("cl_sp_ts1", &cl_sp_ts1);
 
-    TH1D* histogram1_f = new TH1D("histogram1Df_x", "Front face (x)", 50, -400, 400);
-    TH1D* histogram2_f = new TH1D("histogram1Df_y", "Front face (y)", 50, -400, 400);
-    TH2D* histogram3_f = new TH2D("histogram2Df", "Front face", 50, -400, 400, 50, -400, 400);
-    TH1D* histogram1_b = new TH1D("histogram1Db_x", "Back face (x)", 50, -400, 400);
-    TH1D* histogram2_b = new TH1D("histogram1Db_y", "Back face (y)", 50, -400, 400);
-    TH2D* histogram3_b = new TH2D("histogram2Db", "Back face", 50, -400, 400, 50, -400, 400);
-    TH1D* histogram1_l = new TH1D("histogram1Dl_y", "Left face (y)", 50, -400, 400);
-    TH1D* histogram2_l = new TH1D("histogram1Dl_z", "Left face (z)", 50, -200, 800);
-    TH2D* histogram3_l = new TH2D("histogram2Dl", "Left face", 50, -400, 400, 50, -200, 800);
-    TH1D* histogram1_r = new TH1D("histogram1Dr_y", "Right face (y)", 50, -400, 400);
-    TH1D* histogram2_r = new TH1D("histogram1Dr_z", "Right face (z)", 50, -200, 800);
-    TH2D* histogram3_r = new TH2D("histogram2Dr", "Right face", 50, -400, 400, 50, -200, 800);
-    TH1D* histogram1_t = new TH1D("histogram1Dt_x", "Top face (x)", 50, -400, 400);
-    TH1D* histogram2_t = new TH1D("histogram1Dt_z", "Top face (z)", 50, -200, 800);
-    TH2D* histogram3_t = new TH2D("histogram2Dt", "Top face", 50, -400, 400, 50, -200, 800);
-    TH1D* histogram1_d = new TH1D("histogram1Dd_x", "Bottom face (x)", 50, -400, 400);
-    TH1D* histogram2_d = new TH1D("histogram1Dd_z", "Bottom face (z)", 50, -200, 800);
-    TH2D* histogram3_d = new TH2D("histogram2Dd", "Bottom face", 50, -400, 400, 50, -200, 800);
+    TH1D* histogram1_f = new TH1D("histogram1Df_x", "Front face (x)", 128, -400, 400);
+    TH1D* histogram2_f = new TH1D("histogram1Df_y", "Front face (y)", 128, -400, 400);
+    TH2D* histogram3_f = new TH2D("histogram2Df", "Front face", 128, -400, 400, 128, -400, 400);
+    TH1D* histogram1_b = new TH1D("histogram1Db_x", "Back face (x)", 128, -400, 400);
+    TH1D* histogram2_b = new TH1D("histogram1Db_y", "Back face (y)", 128, -400, 400);
+    TH2D* histogram3_b = new TH2D("histogram2Db", "Back face", 128, -400, 400, 128, -400, 400);
+    TH1D* histogram1_l = new TH1D("histogram1Dl_y", "Left face (y)", 128, -400, 400);
+    TH1D* histogram2_l = new TH1D("histogram1Dl_z", "Left face (z)", 128, -200, 800);
+    TH2D* histogram3_l = new TH2D("histogram2Dl", "Left face", 128, -400, 400, 128, -200, 800);
+    TH1D* histogram1_r = new TH1D("histogram1Dr_y", "Right face (y)", 128, -400, 400);
+    TH1D* histogram2_r = new TH1D("histogram1Dr_z", "Right face (z)", 128, -200, 800);
+    TH2D* histogram3_r = new TH2D("histogram2Dr", "Right face", 128, -400, 400, 128, -200, 800);
+    TH1D* histogram1_t = new TH1D("histogram1Dt_x", "Top face (x)", 128, -400, 400);
+    TH1D* histogram2_t = new TH1D("histogram1Dt_z", "Top face (z)", 128, -200, 800);
+    TH2D* histogram3_t = new TH2D("histogram2Dt", "Top face", 128, -400, 400, 128, -200, 800);
+    TH1D* histogram1_d = new TH1D("histogram1Dd_x", "Bottom face (x)", 128, -400, 400);
+    TH1D* histogram2_d = new TH1D("histogram1Dd_z", "Bottom face (z)", 128, -200, 800);
+    TH2D* histogram3_d = new TH2D("histogram2Dd", "Bottom face", 128, -400, 400, 128, -200, 800);
 
     TCanvas* c1_f = new TCanvas("c1_f", "Front Face (x)", 800, 600);
     TCanvas* c2_f = new TCanvas("c2_f", "Front Face (y)", 800, 600);
@@ -107,7 +107,7 @@ int crtana_no_time_cut() {
     for (Long64_t i = 0; i < n_entries; ++i) {
         chain.GetEntry(i);
 
-        if ((i % 1000) == 0) {
+        if ((i % 10000) == 0) {
             std::cout << i << "k" << std::endl;
         }
 
@@ -196,35 +196,35 @@ int crtana_no_time_cut() {
 	histogram3_b->Draw("COLZ");
 
 	c1_l->cd();
-	histogram1_l->GetXaxis()->SetTitle("X (cm)");
+	histogram1_l->GetXaxis()->SetTitle("Y (cm)");
 	histogram1_l->GetYaxis()->SetTitle("Number of Hits");
 	histogram1_l->Draw();
 
 	c2_l->cd();
-	histogram2_l->GetXaxis()->SetTitle("Y (cm)");
+	histogram2_l->GetXaxis()->SetTitle("Z (cm)");
 	histogram2_l->GetYaxis()->SetTitle("Number of Hits");
 	histogram2_l->Draw();
 
 	c3_l->cd();
 	c3_l->SetLogz();
-	histogram3_l->GetXaxis()->SetTitle("X (cm)");
-	histogram3_l->GetYaxis()->SetTitle("Y (cm)");
+	histogram3_l->GetXaxis()->SetTitle("Y (cm)");
+	histogram3_l->GetYaxis()->SetTitle("Z (cm)");
 	histogram3_l->Draw("COLZ");
 
 	c1_r->cd();
-	histogram1_r->GetXaxis()->SetTitle("X (cm)");
+	histogram1_r->GetXaxis()->SetTitle("Y (cm)");
 	histogram1_r->GetYaxis()->SetTitle("Number of Hits");
 	histogram1_r->Draw();
 
 	c2_r->cd();
-	histogram2_r->GetXaxis()->SetTitle("Y (cm)");
+	histogram2_r->GetXaxis()->SetTitle("Z (cm)");
 	histogram2_r->GetYaxis()->SetTitle("Number of Hits");
 	histogram2_r->Draw();
 
 	c3_r->cd();
 	c3_r->SetLogz();
-	histogram3_r->GetXaxis()->SetTitle("X (cm)");
-	histogram3_r->GetYaxis()->SetTitle("Y (cm)");
+	histogram3_r->GetXaxis()->SetTitle("Y (cm)");
+	histogram3_r->GetYaxis()->SetTitle("Z (cm)");
 	histogram3_r->Draw("COLZ");
 
 	c1_t->cd();
@@ -233,14 +233,14 @@ int crtana_no_time_cut() {
 	histogram1_t->Draw();
 
 	c2_t->cd();
-	histogram2_t->GetXaxis()->SetTitle("Y (cm)");
+	histogram2_t->GetXaxis()->SetTitle("Z (cm)");
 	histogram2_t->GetYaxis()->SetTitle("Number of Hits");
 	histogram2_t->Draw();
 
 	c3_t->cd();
 	c3_t->SetLogz();
 	histogram3_t->GetXaxis()->SetTitle("X (cm)");
-	histogram3_t->GetYaxis()->SetTitle("Y (cm)");
+	histogram3_t->GetYaxis()->SetTitle("Z (cm)");
 	histogram3_t->Draw("COLZ");
 
 	c1_d->cd();
@@ -249,42 +249,43 @@ int crtana_no_time_cut() {
 	histogram1_d->Draw();
 
 	c2_d->cd();
-	histogram2_d->GetXaxis()->SetTitle("Y (cm)");
+	histogram2_d->GetXaxis()->SetTitle("Z (cm)");
 	histogram2_d->GetYaxis()->SetTitle("Number of Hits");
 	histogram2_d->Draw();
 
 	c3_d->cd();
 	c3_d->SetLogz();
 	histogram3_d->GetXaxis()->SetTitle("X (cm)");
-	histogram3_d->GetYaxis()->SetTitle("Y (cm)");
+	histogram3_d->GetYaxis()->SetTitle("Z (cm)");
 	histogram3_d->Draw("COLZ");
 
 
 
 
-	c1_f->SaveAs("Front_face_x.png");
-	c2_f->SaveAs("Front_face_y.png");
-	c3_f->SaveAs("Front_face.png");
+	c1_f->SaveAs("Front_face_x_no_time_cut_all.png");
+	c2_f->SaveAs("Front_face_y_no_time_cut_all.png");
+	c3_f->SaveAs("Front_face_no_time_cut_all.png");
 
-	c1_b->SaveAs("Back_face_x.png");
-	c2_b->SaveAs("Back_face_y.png");
-	c3_b->SaveAs("Back_face.png");
+	c1_b->SaveAs("Back_face_x_no_time_cut_all.png");
+	c2_b->SaveAs("Back_face_y_no_time_cut_all.png");
+	c3_b->SaveAs("Back_face_no_time_cut_all.png");
 
-	c1_l->SaveAs("Left_face_y.png");
-	c2_l->SaveAs("Left_face_z.png");
-	c3_l->SaveAs("Left_face.png");
+	c1_l->SaveAs("Left_face_y_no_time_cut_all.png");
+	c2_l->SaveAs("Left_face_z_no_time_cut_all.png");
+	c3_l->SaveAs("Left_face_no_time_cut_all.png");
 
-	c1_r->SaveAs("Right_face_y.png");
-	c2_r->SaveAs("Right_face_z.png");
-	c3_r->SaveAs("Right_face.png");
+	c1_r->SaveAs("Right_face_y_no_time_cut_all.png");
+	c2_r->SaveAs("Right_face_z_no_time_cut_all.png");
+	c3_r->SaveAs("Right_face_no_time_cut_all.png");
 
-	c1_t->SaveAs("Top_face_x.png");
-	c2_t->SaveAs("Top_face_y.png");
-	c3_t->SaveAs("Top_face.png");
+	c1_t->SaveAs("Top_face_x_no_time_cut_all.png");
+	c2_t->SaveAs("Top_face_z_no_time_cut_all.png");
+	c3_t->SaveAs("Top_face_no_time_cut_all.png");
 
-	c1_d->SaveAs("Bottom_face_x.png");
-	c2_d->SaveAs("Bottom_face_y.png");
-	c3_d->SaveAs("Bottom_face.png");
+	c1_d->SaveAs("Bottom_face_x_no_time_cut_all.png");
+	c2_d->SaveAs("Bottom_face_z_no_time_cut_all.png");
+	c3_d->SaveAs("Bottom_face_no_time_cut_all.png");
+
 	
 	return 0;
 	}

@@ -21,25 +21,25 @@ int crtana_no_cosmic_rays_gaussian() {
     std::string directory = "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/";
 
         std::vector<std::string> filenames = {       
-		//"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13178_crtana.root",
-		//"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13476_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13666_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13680_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana.root", 
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13828_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13830_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_crtana.root",
+		"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13178_crtana.root",
+		"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13476_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13666_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13680_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana.root", 
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13828_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13830_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_crtana.root",
                 "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_fixed_channel_map_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13281_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana_all.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_run13666_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13320_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana.root"
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_fixed_channel_map_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13281_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana_all.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_run13666_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13320_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana.root"
                                };
 
 
@@ -186,10 +186,10 @@ int crtana_no_cosmic_rays_gaussian() {
 
         histogram1_f_neut->Fit("fit1D_x_f_neut");
         histogram2_f_neut->Fit("fit1D_y_f_neut");
-        histogram3_f_neut->Fit("fit2D_f_neut");
+        histogram3_f_neut->Fit("fit2D_f_neut", "N");
         histogram1_b_neut->Fit("fit1D_x_b_neut");
         histogram2_b_neut->Fit("fit1D_y_b_neut");
-        histogram3_b_neut->Fit("fit2D_b_neut");
+        histogram3_b_neut->Fit("fit2D_b_neut", "N");
 
         std::cout << "Fit parameters for Front face (2D): " << std::endl;
         fit2D_f_neut->Print();
@@ -229,25 +229,24 @@ int crtana_no_cosmic_rays_gaussian() {
         std::cout << "Back Chi-Squared/Degrees Freedom: " << chi_per_deg_b << std::endl;
 
 
-        //TPaveText *ptf = new TPaveText(0.7, 0.7, 0.9, 0.9, "NDC");
-        //ptf->AddText(Form("Chi2: %.2f", chi2f));
-        //ptf->AddText(Form("NDF: %d", ndff));
-        //ptf->AddText(Form("Chi2/NDF: %.2f", chi2f/ndff));
-        //ptf->SetFillColor(0);
-        //ptf->SetTextColor(kRed);
-
-        //TPaveText *ptb = new TPaveText(0.7, 0.7, 0.9, 0.9, "NDC");
-        //ptb->AddText(Form("Chi2: %.2f", chi2b));
-        //ptb->AddText(Form("NDF: %d", ndfb));
-        //ptb->AddText(Form("Chi2/NDF: %.2f", chi2b/ndfb));
-        //ptb->SetFillColor(0);
-        //ptb->SetTextColor(kRed);
-	
         gStyle->SetOptStat(0);
         double entriesf = histogram3_f_neut->GetEntries();
         std::cout << "Front entries: " << entriesf << std::endl;
         double entriesb = histogram3_b_neut->GetEntries();
         std::cout << "Back entries: " << entriesb << std::endl;
+
+        const int nContours = 1;
+        double sigma1_f = fit2D_f_neut->GetParameter(0) * exp(-0.5);
+        double sigma1_b = fit2D_b_neut->GetParameter(0) * exp(-0.5);
+
+        double contours_f[nContours] = {sigma1_f};
+        double contours_b[nContours] = {sigma1_b};
+
+        fit2D_f_neut->SetContour(nContours, contours_f);
+        fit2D_b_neut->SetContour(nContours, contours_b);
+
+
+
 
 	c1_f_nocr->cd();
 	histogram1_f_neut->GetXaxis()->SetTitle("X (cm)");
@@ -300,15 +299,15 @@ int crtana_no_cosmic_rays_gaussian() {
         histogram3_b_n->GetYaxis()->SetTitle("Y (cm)");
 	histogram3_b_n->Draw("COLZ");
 
-	c3_f_n->SaveAs("Front_face_cosmic_rays_fitted");
-	c3_b_n->SaveAs("Back_face_cosmic_rays_fitted");
-	c1_f_nocr->SaveAs("Front_face_x_nocr_fitted.png");
-	c2_f_nocr->SaveAs("Front_face_y_nocr_fitted.png");
-	c3_f_nocr->SaveAs("Front_face_nocr_fitted.png");
+	c3_f_n->SaveAs("Front_face_cosmic_rays_gaussian_all");
+	c3_b_n->SaveAs("Back_face_cosmic_rays_gaussian_all");
+	c1_f_nocr->SaveAs("Front_face_x_nocr_gaussian_all.png");
+	c2_f_nocr->SaveAs("Front_face_y_nocr_gaussian_all.png");
+	c3_f_nocr->SaveAs("Front_face_nocr_gaussian_all.png");
 
-	c1_b_nocr->SaveAs("Back_face_x_nocr_fitted.png");
-	c2_b_nocr->SaveAs("Back_face_y_nocr_fitted.png");
-	c3_b_nocr->SaveAs("Back_face_nocr_fitted.png");
+	c1_b_nocr->SaveAs("Back_face_x_nocr_gaussian_all.png");
+	c2_b_nocr->SaveAs("Back_face_y_nocr_gaussian_all.png");
+	c3_b_nocr->SaveAs("Back_face_nocr_gaussian_all.png");
 
 	return 0;
 	}
