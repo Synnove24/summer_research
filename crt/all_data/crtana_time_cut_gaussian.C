@@ -83,6 +83,7 @@ int crtana_time_cut_gaussian() {
 	TCanvas* c2_b_t_f = new TCanvas("c2_b_t_f", "Back Face (y)", 800, 600);
 	TCanvas* c3_b_t_f = new TCanvas("c3_b_t_f", "Back Face", 800, 600);
 
+	//Fill histograms
 	for (Long64_t i = 0; i < n_entries; ++i) {
         	chain.GetEntry(i);
 
@@ -116,8 +117,7 @@ int crtana_time_cut_gaussian() {
        	 	}
     	}
 
-    // Fit functions
-
+    	// Fit functions
 
 	TF1* fit1D_x_f = new TF1("fit1D_x_f", "gaus", -400, 400);
 	TF1* fit1D_y_f = new TF1("fit1D_y_f", "gaus", -350, 400);
@@ -125,9 +125,12 @@ int crtana_time_cut_gaussian() {
 	TF1* fit1D_y_b = new TF1("fit1D_y_b", "gaus", -350, 400);
 	TF2* fit2D_f = new TF2("fit2D_f", "[0]*exp(-0.5*((x-[1])*(x-[1])/([2]*[2]) + (y-[3])*(y-[3])/([4]*[4])))", -400, 400, -400, 400);
     	TF2* fit2D_b = new TF2("fit2D_b", "[0]*exp(-0.5*((x-[1])*(x-[1])/([2]*[2]) + (y-[3])*(y-[3])/([4]*[4])))", -400, 400, -400, 400);
-
+	
+	// guesses
 	fit2D_f->SetParameters(1,0,100,0,100);
 	fit2D_b->SetParameters(1,0,100,0,100);
+
+	// N gets rid of contour lines
 
    	histogram1_f_t_f->Fit("fit1D_x_f");
    	histogram2_f_t_f->Fit("fit1D_y_f");
@@ -180,7 +183,7 @@ int crtana_time_cut_gaussian() {
 
 	
 
-
+	//Add single contour line at 1 standard deviation away from mean center
 	const int nContours = 1;
 	double sigma1_f = fit2D_f->GetParameter(0) * exp(-0.5);
 	double sigma1_b = fit2D_b->GetParameter(0) * exp(-0.5);
