@@ -15,25 +15,25 @@ int crtana_time_cut() {
     std::string directory = "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/";
 
         std::vector<std::string> filenames = {                                             
-		//"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13178_crtana.root",                
-		//"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13476_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13666_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13680_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana.root", 
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13828_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13830_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_crtana.root",
+		"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13178_crtana.root",                
+		"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13476_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13666_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13680_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana.root", 
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13828_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13830_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_crtana.root",
                 "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_fixed_channel_map_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13281_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana_all.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_run13666_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13320_crtana.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana.root"
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_fixed_channel_map_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13281_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana_all.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_run13666_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13320_crtana.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana.root"
                                };
 
 
@@ -65,12 +65,12 @@ int crtana_time_cut() {
 	chain.SetBranchAddress("cl_sp_z", &cl_sp_z);
 	chain.SetBranchAddress("cl_sp_ts1", &cl_sp_ts1);
 
-	TH1D* histogram1_f_t = new TH1D("histogram1Dft_x", "Front face (x)", 10, -400, 400);
-	TH1D* histogram2_f_t = new TH1D("histogram1Dft_y", "Front face (y)", 10, -400, 400);
-	TH2D* histogram3_f_t = new TH2D("histogram2Dft", "Front face", 10, -400, 400, 10, -400, 400);
-	TH1D* histogram1_b_t = new TH1D("histogram1Dbt_x", "Back face (x)", 10, -400, 400);
-	TH1D* histogram2_b_t = new TH1D("histogram1Dbt_y", "Back face (y)", 10, -400, 400);
-	TH2D* histogram3_b_t = new TH2D("histogram2Dbt", "Back face", 10, -400, 400, 10, -400, 400);
+	TH1D* histogram1_f_t = new TH1D("histogram1Dft_x", "Front face (x)", 10, -360, 360);
+	TH1D* histogram2_f_t = new TH1D("histogram1Dft_y", "Front face (y)", 10, -360, 360);
+	TH2D* histogram3_f_t = new TH2D("histogram2Dft", "Front face", 10, -360, 360, 10, -360, 360);
+	TH1D* histogram1_b_t = new TH1D("histogram1Dbt_x", "Back face (x)", 10, -360, 360);
+	TH1D* histogram2_b_t = new TH1D("histogram1Dbt_y", "Back face (y)", 10, -360, 360);
+	TH2D* histogram3_b_t = new TH2D("histogram2Dbt", "Back face", 10, -360, 360, 10, -360, 360);
 
 	TCanvas* c1_f_t = new TCanvas("c1_f_t", "Front Face (x)", 800, 600);
 	TCanvas* c2_f_t = new TCanvas("c2_f_t", "Front Face (y)", 800, 600);
@@ -78,6 +78,12 @@ int crtana_time_cut() {
 	TCanvas* c1_b_t = new TCanvas("c1_b_t", "Back Face (x)", 800, 600);
 	TCanvas* c2_b_t = new TCanvas("c2_b_t", "Back Face (y)", 800, 600);
 	TCanvas* c3_b_t = new TCanvas("c3_b_t", "Back Face", 800, 600);
+	
+	//test to find dimensions of detector
+	//double minx = 0;
+	//double maxx = 0;
+	//double miny = 0;
+	//double maxy = 0;
 
 	for (Long64_t i = 0; i < n_entries; ++i) {
         	chain.GetEntry(i);
@@ -95,8 +101,13 @@ int crtana_time_cut() {
             		double x = cl_sp_x->at(j);
             		double y = cl_sp_y->at(j);
             		double z = cl_sp_z->at(j);
+			//if (370 > x && x > maxx) maxx = x;
+			//if (-370 < x && x < minx) minx = x;
+			//if (400 > y && y > maxy) maxy = y;
+			//if (-400 < y && y < miny) miny = y;
 	    		if (1529.8e3 < t1 && t1 < 1532.8e3) {		
-            			if (y > -350) {  //cut off feet of detector
+            			if (y > -360 && y < 360) {  //cut off feet of detector
+				if (x > -360 && x < 360) {
 	    				if (-250 < z && z < -150) {
                 				histogram1_f_t->Fill(x);
                 				histogram2_f_t->Fill(y);
@@ -108,9 +119,14 @@ int crtana_time_cut() {
                 			histogram3_b_t->Fill(x, y);
             				}	
 				}
+				}
 			}
        	 	}
     	}
+	//std::cout << "Lowest X-value: " << minx << std::endl;
+        //std::cout << "Highest X-value: " << maxx << std::endl;	
+        //std::cout << "Lowest Y-value: " << miny << std::endl;
+        //std::cout << "Highest Y-value: " << maxy << std::endl;
 
         gStyle->SetOptStat(0);
         double entriesf = histogram3_f_t->GetEntries();

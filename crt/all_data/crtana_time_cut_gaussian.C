@@ -69,12 +69,12 @@ int crtana_time_cut_gaussian() {
 	chain.SetBranchAddress("cl_sp_z", &cl_sp_z);
 	chain.SetBranchAddress("cl_sp_ts1", &cl_sp_ts1);
 
-	TH1D* histogram1_f_t_f = new TH1D("histogram1Dftf_x", "Front face (x)", 10, -400, 400);
-	TH1D* histogram2_f_t_f = new TH1D("histogram1Dftf_y", "Front face (y)", 10, -300, 400);
-	TH2D* histogram3_f_t_f = new TH2D("histogram2Dftf", "Front face", 10, -400, 400, 10, -350, 400);
-	TH1D* histogram1_b_t_f = new TH1D("histogram1Dbtf_x", "Back face (x)", 10, -400, 400);
-	TH1D* histogram2_b_t_f = new TH1D("histogram1Dbtf_y", "Back face (y)", 10, -350, 400);
-	TH2D* histogram3_b_t_f = new TH2D("histogram2Dbtf", "Back face", 10, -400, 400, 10, -350, 400);
+	TH1D* histogram1_f_t_f = new TH1D("histogram1Dftf_x", "Front face (x)", 10, -360, 360);
+	TH1D* histogram2_f_t_f = new TH1D("histogram1Dftf_y", "Front face (y)", 10, -360, 360);
+	TH2D* histogram3_f_t_f = new TH2D("histogram2Dftf", "Front face", 10, -360, 360, 10, -360, 360);
+	TH1D* histogram1_b_t_f = new TH1D("histogram1Dbtf_x", "Back face (x)", 10, -360, 360);
+	TH1D* histogram2_b_t_f = new TH1D("histogram1Dbtf_y", "Back face (y)", 10, -360, 360);
+	TH2D* histogram3_b_t_f = new TH2D("histogram2Dbtf", "Back face", 10, -360, 360, 10, -360, 360);
 
 	TCanvas* c1_f_t_f = new TCanvas("c1_f_t_f", "Front Face (x)", 800, 600);
 	TCanvas* c2_f_t_f = new TCanvas("c2_f_t_f", "Front Face (y)", 800, 600);
@@ -101,7 +101,8 @@ int crtana_time_cut_gaussian() {
             		double y = cl_sp_y->at(j);
             		double z = cl_sp_z->at(j);
 	    		if (1529.8e3 < t1 && t1 < 1532.8e3) {		
-            			if (y > -350) {  //cut off feet of detector
+            			if (y > -360 && y < 360) {  //cut off feet of detector
+				if (x > -360 && x < 360) {
 	    				if (-250 < z && z < -150) {
                 				histogram1_f_t_f->Fill(x);
                 				histogram2_f_t_f->Fill(y);
@@ -112,6 +113,7 @@ int crtana_time_cut_gaussian() {
                 			histogram2_b_t_f->Fill(y);
                 			histogram3_b_t_f->Fill(x, y);
             				}	
+				}
 				}
 			}
        	 	}

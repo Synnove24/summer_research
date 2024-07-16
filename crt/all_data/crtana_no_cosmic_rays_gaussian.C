@@ -71,19 +71,19 @@ int crtana_no_cosmic_rays_gaussian() {
 	chain.SetBranchAddress("cl_sp_z", &cl_sp_z);
 	chain.SetBranchAddress("cl_sp_ts1", &cl_sp_ts1);
 
-	TH1D* histogram1_f_t = new TH1D("histogram1Dft_x", "Front face (x)", 10, -400, 400);
-	TH1D* histogram2_f_t = new TH1D("histogram1Dft_y", "Front face (y)", 10, -400, 400);
-	TH2D* histogram3_f_t = new TH2D("histogram2Dft", "Front face", 10, -400, 400, 10, -400, 400);
-	TH1D* histogram1_b_t = new TH1D("histogram1Dbt_x", "Back face (x)", 10, -400, 400);
-	TH1D* histogram2_b_t = new TH1D("histogram1Dbt_y", "Back face (y)", 10, -400, 400);
-	TH2D* histogram3_b_t = new TH2D("histogram2Dbt", "Back face", 10, -400, 400, 10, -400, 400);
+	TH1D* histogram1_f_t = new TH1D("histogram1Dft_x", "Front face (x)", 10, -360, 360);
+	TH1D* histogram2_f_t = new TH1D("histogram1Dft_y", "Front face (y)", 10, -360, 360);
+	TH2D* histogram3_f_t = new TH2D("histogram2Dft", "Front face", 10, -360, 360, 10, -360, 360);
+	TH1D* histogram1_b_t = new TH1D("histogram1Dbt_x", "Back face (x)", 10, -360, 360);
+	TH1D* histogram2_b_t = new TH1D("histogram1Dbt_y", "Back face (y)", 10, -360, 360);
+	TH2D* histogram3_b_t = new TH2D("histogram2Dbt", "Back face", 10, -360, 360, 10, -360, 360);
 
-        TH1D* histogram1_f_n = new TH1D("histogram1Dfn_x", "Front face no beam (x)", 10, -400, 400);
-        TH1D* histogram2_f_n = new TH1D("histogram1Dfn_y", "Front face no beam (y)", 10, -400, 400);
-        TH2D* histogram3_f_n = new TH2D("histogram2Dfn", "Front face no beam", 10, -400, 400, 10, -400, 400);
-        TH1D* histogram1_b_n = new TH1D("histogram1Dbn_x", "Back face no beam (x)", 10, -400, 400);
-        TH1D* histogram2_b_n = new TH1D("histogram1Dbn_y", "Back face no beam (y)", 10, -400, 400);
-        TH2D* histogram3_b_n = new TH2D("histogram2Dbn", "Back face no beam", 10, -400, 400, 10, -400, 400);
+        TH1D* histogram1_f_n = new TH1D("histogram1Dfn_x", "Front face no beam (x)", 10, -360, 360);
+        TH1D* histogram2_f_n = new TH1D("histogram1Dfn_y", "Front face no beam (y)", 10, -360, 360);
+        TH2D* histogram3_f_n = new TH2D("histogram2Dfn", "Front face no beam", 10, -360, 360, 10, -360, 360);
+        TH1D* histogram1_b_n = new TH1D("histogram1Dbn_x", "Back face no beam (x)", 10, -360, 360);
+        TH1D* histogram2_b_n = new TH1D("histogram1Dbn_y", "Back face no beam (y)", 10, -360, 360);
+        TH2D* histogram3_b_n = new TH2D("histogram2Dbn", "Back face no beam", 10, -360, 360, 10, -360, 360);
 
 	TCanvas* c1_f_nocr = new TCanvas("c1_f_nocr", "Front Face (x)", 800, 600);
 	TCanvas* c2_f_nocr = new TCanvas("c2_f_nocr", "Front Face (y)", 800, 600);
@@ -115,7 +115,8 @@ int crtana_no_cosmic_rays_gaussian() {
             		double y = cl_sp_y->at(j);
             		double z = cl_sp_z->at(j);
 	    		if (start_spill < t1 && t1 < end_spill) {		
-            			if (y > -350) {  //cut off feet of detector
+            			if (y > -360 && y < 360) {  //cut off feet of detector
+				if (x > -360 && x < 360) {
 	    				if (-250 < z && z < -150) {
                 				histogram1_f_t->Fill(x);
                 				histogram2_f_t->Fill(y);
@@ -127,9 +128,11 @@ int crtana_no_cosmic_rays_gaussian() {
                 				histogram3_b_t->Fill(x, y);
             				}	
 				}
+				}	
 			}
 			else if ((start_time < t1 && t1 < start_spill) || (end_spill < t1 && t1 < end_time)) {
-				if (y > -350) {
+				if (y > -360 && y < 360) {
+				if (x > -360 && x < 360) {
 					if (-250 < z && z < -150) {
                                                 histogram1_f_n->Fill(x);
                                                 histogram2_f_n->Fill(y);
@@ -140,6 +143,7 @@ int crtana_no_cosmic_rays_gaussian() {
                                                 histogram2_b_n->Fill(y);
                                                 histogram3_b_n->Fill(x, y);			
 					}
+				}
 				}
 			}
        	 	}
@@ -174,10 +178,10 @@ int crtana_no_cosmic_rays_gaussian() {
         histogram3_b_neut->Add(histogram3_b_n, -1);
 
 
-        TF1* fit1D_x_f_neut = new TF1("fit1D_x_f_neut", "gaus", -400, 400);
-        TF1* fit1D_y_f_neut = new TF1("fit1D_y_f_neut", "gaus", -350, 400);
-        TF1* fit1D_x_b_neut = new TF1("fit1D_x_b_neut", "gaus", -400, 400);
-        TF1* fit1D_y_b_neut = new TF1("fit1D_y_b_neut", "gaus", -350, 400);
+        TF1* fit1D_x_f_neut = new TF1("fit1D_x_f_neut", "gaus", -360, 360);
+        TF1* fit1D_y_f_neut = new TF1("fit1D_y_f_neut", "gaus", -360, 360);
+        TF1* fit1D_x_b_neut = new TF1("fit1D_x_b_neut", "gaus", -360, 360);
+        TF1* fit1D_y_b_neut = new TF1("fit1D_y_b_neut", "gaus", -360, 360);
         TF2* fit2D_f_neut = new TF2("fit2D_f_neut", "[0]*exp(-0.5*((x-[1])*(x-[1])/([2]*[2]) + (y-[3])*(y-[3])/([4]*[4])))", -400,400,-400,400);
         TF2* fit2D_b_neut = new TF2("fit2D_b_neut", "[0]*exp(-0.5*((x-[1])*(x-[1])/([2]*[2]) + (y-[3])*(y-[3])/([4]*[4])))", -400,400,-400,400);
 

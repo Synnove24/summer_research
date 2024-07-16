@@ -15,25 +15,25 @@ int crtana_no_cosmic_rays() {
     std::string directory = "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/";
 
         std::vector<std::string> filenames = {       
-		"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13178_crtana.root",
-		"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13476_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13666_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13680_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana.root", 
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13828_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13830_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_crtana.root",
+		//"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13178_crtana.root",
+		//"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13476_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13666_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13680_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana.root", 
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13828_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13830_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_crtana.root",
                 "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_fixed_channel_map_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13281_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana_all.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_run13666_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13320_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana.root"
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_fixed_channel_map_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13281_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana_all.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_run13666_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13320_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana.root"
                                };
 
 
@@ -65,19 +65,19 @@ int crtana_no_cosmic_rays() {
 	chain.SetBranchAddress("cl_sp_z", &cl_sp_z);
 	chain.SetBranchAddress("cl_sp_ts1", &cl_sp_ts1);
 
-	TH1D* histogram1_f_t = new TH1D("histogram1Dft_x", "Front face (x)", 10, -400, 400);
-	TH1D* histogram2_f_t = new TH1D("histogram1Dft_y", "Front face (y)", 10, -400, 400);
-	TH2D* histogram3_f_t = new TH2D("histogram2Dft", "Front face", 10, -400, 400, 10, -400, 400);
-	TH1D* histogram1_b_t = new TH1D("histogram1Dbt_x", "Back face (x)", 10, -400, 400);
-	TH1D* histogram2_b_t = new TH1D("histogram1Dbt_y", "Back face (y)", 10, -400, 400);
-	TH2D* histogram3_b_t = new TH2D("histogram2Dbt", "Back face", 10, -400, 400, 10, -400, 400);
+	TH1D* histogram1_f_t = new TH1D("histogram1Dft_x", "Front face (x)", 10, -360, 360);
+	TH1D* histogram2_f_t = new TH1D("histogram1Dft_y", "Front face (y)", 10, -360, 360);
+	TH2D* histogram3_f_t = new TH2D("histogram2Dft", "Front face", 10, -360, 360, 10, -360, 360);
+	TH1D* histogram1_b_t = new TH1D("histogram1Dbt_x", "Back face (x)", 10, -360, 360);
+	TH1D* histogram2_b_t = new TH1D("histogram1Dbt_y", "Back face (y)", 10, -360, 360);
+	TH2D* histogram3_b_t = new TH2D("histogram2Dbt", "Back face", 10, -360, 360, 10, -360, 360);
 
-        TH1D* histogram1_f_n = new TH1D("histogram1Dfn_x", "Front face no beam (x)", 10, -400, 400);
-        TH1D* histogram2_f_n = new TH1D("histogram1Dfn_y", "Front face no beam (y)", 10, -400, 400);
-        TH2D* histogram3_f_n = new TH2D("histogram2Dfn", "Front face no beam", 10, -400, 400, 10, -400, 400);
-        TH1D* histogram1_b_n = new TH1D("histogram1Dbn_x", "Back face no beam (x)", 10, -400, 400);
-        TH1D* histogram2_b_n = new TH1D("histogram1Dbn_y", "Back face no beam (y)", 10, -400, 400);
-        TH2D* histogram3_b_n = new TH2D("histogram2Dbn", "Back face no beam", 10, -400, 400, 10, -400, 400);
+        TH1D* histogram1_f_n = new TH1D("histogram1Dfn_x", "Front face no beam (x)", 10, -360, 360);
+        TH1D* histogram2_f_n = new TH1D("histogram1Dfn_y", "Front face no beam (y)", 10, -360, 360);
+        TH2D* histogram3_f_n = new TH2D("histogram2Dfn", "Front face no beam", 10, -360, 360, 10, -360, 360);
+        TH1D* histogram1_b_n = new TH1D("histogram1Dbn_x", "Back face no beam (x)", 10, -360, 360);
+        TH1D* histogram2_b_n = new TH1D("histogram1Dbn_y", "Back face no beam (y)", 10, -360, 360);
+        TH2D* histogram3_b_n = new TH2D("histogram2Dbn", "Back face no beam", 10, -360, 360, 10, -360, 360);
 
 	TCanvas* c1_f_nocr = new TCanvas("c1_f_nocr", "Front Face (x)", 800, 600);
 	TCanvas* c2_f_nocr = new TCanvas("c2_f_nocr", "Front Face (y)", 800, 600);
@@ -109,7 +109,8 @@ int crtana_no_cosmic_rays() {
             		double y = cl_sp_y->at(j);
             		double z = cl_sp_z->at(j);
 	    		if (start_spill < t1 && t1 < end_spill) {		
-            			if (y > -350) {  //cut off feet of detector
+            			if (y > -360 && y < 360) {  //cut off feet of detector
+				if (x > -360 && x < 360) {
 	    				if (-250 < z && z < -150) {
                 				histogram1_f_t->Fill(x);
                 				histogram2_f_t->Fill(y);
@@ -121,9 +122,11 @@ int crtana_no_cosmic_rays() {
                 				histogram3_b_t->Fill(x, y);
             				}	
 				}
+				}
 			}
 			else if ((start_time < t1 && t1 < start_spill) || (end_spill < t1 && t1 < end_time)) {
-				if (y > -350) {
+				if (y > -360 && y < 360) {
+				if (x > -360 && x < 360) {
 					if (-250 < z && z < -150) {
                                                 histogram1_f_n->Fill(x);
                                                 histogram2_f_n->Fill(y);
@@ -135,11 +138,12 @@ int crtana_no_cosmic_rays() {
                                                 histogram3_b_n->Fill(x, y);			
 					}
 				}
+				}
 			}
        	 	}
     	}
 
-//scale no beam areas
+	//Calulate scaling factor
 	double total_time = end_time - start_time;
 	double spill_time = end_spill - start_spill;
 	double no_spill = total_time - spill_time;
@@ -216,8 +220,8 @@ int crtana_no_cosmic_rays() {
 	histogram3_b_n->Draw("COLZ");
 
 
-	c3_f_n->SaveAs("Front_face_cosmic_rays_all");
-	c3_b_n->SaveAs("Back_face_cosmic_rays_all");
+	c3_f_n->SaveAs("Front_face_cosmic_rays_all.png");
+	c3_b_n->SaveAs("Back_face_cosmic_rays_all.png");
 	c1_f_nocr->SaveAs("Front_face_x_nocr_all.png");
 	c2_f_nocr->SaveAs("Front_face_y_nocr_all.png");
 	c3_f_nocr->SaveAs("Front_face_nocr_all.png");
