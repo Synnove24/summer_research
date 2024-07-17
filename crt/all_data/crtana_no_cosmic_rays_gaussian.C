@@ -294,18 +294,7 @@ int crtana_no_cosmic_rays_gaussian() {
 
 
 
-	c3_f_n->cd();
-        histogram3_f_n->GetXaxis()->SetTitle("X (cm)");
-        histogram3_f_n->GetYaxis()->SetTitle("Y (cm)");
-	histogram3_f_n->Draw("COLZ");
-	c3_b_n->cd();
-        histogram3_b_n->GetXaxis()->SetTitle("X (cm)");
-        histogram3_b_n->GetYaxis()->SetTitle("Y (cm)");
-	histogram3_b_n->Draw("COLZ");
-
-	c3_f_n->SaveAs("Front_face_cosmic_rays_gaussian_all");
-	c3_b_n->SaveAs("Back_face_cosmic_rays_gaussian_all");
-	c1_f_nocr->SaveAs("Front_face_x_nocr_gaussian_all.png");
+	1_f_nocr->SaveAs("Front_face_x_nocr_gaussian_all.png");
 	c2_f_nocr->SaveAs("Front_face_y_nocr_gaussian_all.png");
 	c3_f_nocr->SaveAs("Front_face_nocr_gaussian_all.png");
 
