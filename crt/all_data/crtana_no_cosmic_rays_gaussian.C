@@ -265,12 +265,10 @@ int crtana_no_cosmic_rays_gaussian() {
 	fit1D_y_f_neut->Draw("same");
 
 	c3_f_nocr->cd();
-	//c3_f_nocr->SetLogz();
 	histogram3_f_neut->GetXaxis()->SetTitle("X (cm)");
 	histogram3_f_neut->GetYaxis()->SetTitle("Y (cm)");
 	histogram3_f_neut->Draw("COLZ");
 	fit2D_f_neut->Draw("CONT3 SAME");
-	//ptf->Draw();
 
 	c1_b_nocr->cd();
 	histogram1_b_neut->GetXaxis()->SetTitle("X (cm)");

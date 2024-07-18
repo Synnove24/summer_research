@@ -220,15 +220,15 @@ int crtana_no_cosmic_rays() {
 	histogram3_b_n->Draw("COLZ");
 
 
-	c3_f_n->SaveAs("Front_face_cosmic_rays_all.png");
-	c3_b_n->SaveAs("Back_face_cosmic_rays_all.png");
-	c1_f_nocr->SaveAs("Front_face_x_nocr_all.png");
-	c2_f_nocr->SaveAs("Front_face_y_nocr_all.png");
-	c3_f_nocr->SaveAs("Front_face_nocr_all.png");
+	c3_f_n->SaveAs("Front_face_cosmic_rays_test.png");
+	c3_b_n->SaveAs("Back_face_cosmic_rays_test.png");
+	c1_f_nocr->SaveAs("Front_face_x_nocr_test.png");
+	c2_f_nocr->SaveAs("Front_face_y_nocr_test.png");
+	c3_f_nocr->SaveAs("Front_face_nocr_test.png");
 
-	c1_b_nocr->SaveAs("Back_face_x_nocr_all.png");
-	c2_b_nocr->SaveAs("Back_face_y_nocr_all.png");
-	c3_b_nocr->SaveAs("Back_face_nocr_all.png");
+	c1_b_nocr->SaveAs("Back_face_x_nocr_test.png");
+	c2_b_nocr->SaveAs("Back_face_y_nocr_test.png");
+	c3_b_nocr->SaveAs("Back_face_nocr_test.png");
 
 	return 0;
 	}

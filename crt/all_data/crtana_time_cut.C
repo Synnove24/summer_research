@@ -15,25 +15,25 @@ int crtana_time_cut() {
     std::string directory = "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/";
 
         std::vector<std::string> filenames = {                                             
-		"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13178_crtana.root",                
-		"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13476_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13666_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13680_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana.root", 
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13828_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13830_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_fixed_channel_map_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13281_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana_all.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_run13666_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13320_crtana.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana.root"
+		//"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13178_crtana.root",                
+		//"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13476_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13666_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13680_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana.root", 
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13828_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13830_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13466_fixed_channel_map_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13281_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13268_crtana_all.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13470_run13666_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13320_crtana.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana.root"
                                };
 
 
@@ -106,7 +106,7 @@ int crtana_time_cut() {
 			//if (400 > y && y > maxy) maxy = y;
 			//if (-400 < y && y < miny) miny = y;
 	    		if (1529.8e3 < t1 && t1 < 1532.8e3) {		
-            			if (y > -360 && y < 360) {  //cut off feet of detector
+            			if (y > -360 && y < 360) { 
 				if (x > -360 && x < 360) {
 	    				if (-250 < z && z < -150) {
                 				histogram1_f_t->Fill(x);
@@ -162,13 +162,13 @@ int crtana_time_cut() {
     	c3_b_t->SetLogz();
 	histogram3_b_t->Draw("COLZ");
 
-	c1_f_t->SaveAs("Front_face_x_time_cut_all.png");
-	c2_f_t->SaveAs("Front_face_y_time_cut_all.png");
-	c3_f_t->SaveAs("Front_face_time_cut_all.png");
+	c1_f_t->SaveAs("Front_face_x_time_cut_test.png");
+	c2_f_t->SaveAs("Front_face_y_time_cut_test.png");
+	c3_f_t->SaveAs("Front_face_time_cut_test.png");
 
-	c1_b_t->SaveAs("Back_face_x_time_cut_all.png");
-	c2_b_t->SaveAs("Back_face_y_time_cut_all.png");
-	c3_b_t->SaveAs("Back_face_time_cut_all.png");
+	c1_b_t->SaveAs("Back_face_x_time_cut_test.png");
+	c2_b_t->SaveAs("Back_face_y_time_cut_test.png");
+	c3_b_t->SaveAs("Back_face_time_cut_test.png");
 
 	return 0;
 	}
