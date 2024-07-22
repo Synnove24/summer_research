@@ -180,53 +180,52 @@ int crtana_all_histograms() {
             		double x = cl_sp_x->at(j);
             		double y = cl_sp_y->at(j);
             		double z = cl_sp_z->at(j);
-	                histogram_t_t->Fill(t1);
-                        if (y > -360 && y < 360) {
-                        if (x > -360 && x < 360) {            	 	
-				if (-450 < y && y < -350) {
-					histogram1_d->Fill(x);
-					histogram2_d->Fill(z);
-					histogram3_d->Fill(x, z);
-				} 
-				if (350 < y && y < 450) {
-					histogram1_t->Fill(x);
-					histogram2_t->Fill(z);
-					histogram3_t->Fill(x, z);
-				} 
-				if (-450 < x && x < -350) {
-					histogram1_r->Fill(y);
-					histogram2_r->Fill(z);
-					histogram3_r->Fill(y, z);
-				} 	
-				if (350 < x && x < 450) {
-					histogram1_l->Fill(y);
-					histogram2_l->Fill(z);
-					histogram3_l->Fill(y, z);
-				} 	 	
-				if (750 < z && z < 850) {
-					histogram1_b->Fill(x);
-					histogram2_b->Fill(y);
-					histogram3_b->Fill(x, y);
-				}
-                                if (-250 < z && z < -150) {
-                                        histogram1_f->Fill(x);
-                                        histogram2_f->Fill(y);
-                                        histogram3_f->Fill(x, y);
-                        		if (start_spill < t1 && t1 < end_spill) {
+	                histogram_t_t->Fill(t1);           	 	
+			if (-450 < y && y < -350) {
+				histogram1_d->Fill(x);
+				histogram2_d->Fill(z);
+				histogram3_d->Fill(x, z);
+			} 
+			if (350 < y && y < 450) {
+				histogram1_t->Fill(x);
+				histogram2_t->Fill(z);
+				histogram3_t->Fill(x, z);
+			} 
+			if (-450 < x && x < -350) {
+				histogram1_r->Fill(y);
+				histogram2_r->Fill(z);
+				histogram3_r->Fill(y, z);
+			} 	
+			if (350 < x && x < 450) {
+				histogram1_l->Fill(y);
+				histogram2_l->Fill(z);
+				histogram3_l->Fill(y, z);
+			} 	 	
+			if (750 < z && z < 850) {
+				histogram1_b->Fill(x);
+				histogram2_b->Fill(y);
+				histogram3_b->Fill(x, y);
+			}
+			if (-250 < z && z < -150) {
+				if (y > -360 && y < 360) {                                                                                              if (x > -360 && x < 360) {			
+					histogram1_f->Fill(x);
+					histogram2_f->Fill(y);
+					histogram3_f->Fill(x, y);
+					if (start_spill < t1 && t1 < end_spill) {
 						histogram1_f_t->Fill(x);
 						histogram2_f_t->Fill(y);
 						histogram3_f_t->Fill(x, y);
-                                                histogram1_f_t_g->Fill(x);
-                                                histogram2_f_t_g->Fill(y);
-                                                histogram3_f_t_g->Fill(x, y);
+						histogram1_f_t_g->Fill(x);
+						histogram2_f_t_g->Fill(y);
+						histogram3_f_t_g->Fill(x, y);
 					}
-                        		else if ((start_time < t1 && t1 < start_spill) || (end_spill < t1 && t1 < end_time)) {
+					else if ((start_time < t1 && t1 < start_spill) || (end_spill < t1 && t1 < end_time)) {
 						histogram1_f_n->Fill(x);
 						histogram2_f_n->Fill(y);
 						histogram3_f_n->Fill(x, y);	
 					}
 				}
-			}
+				}
 			}
 		}
     	} 
@@ -346,12 +345,11 @@ int crtana_all_histograms() {
 
 	//Set axes and draw
 	//Time
+	c_t_t->cd();
         histogram_t_t->GetXaxis()->SetTitle("Time (ns)");
         histogram_t_t->GetYaxis()->SetTitle("Number of hits");
-        c_t_t->SetWindowPosition(0, 0);
         histogram_t_t->Draw();
-        c_t_t->Update();
-
+        
 	//No time cut
         c1_f->cd();
         histogram1_f->GetXaxis()->SetTitle("X (cm)");
