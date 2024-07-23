@@ -203,7 +203,7 @@ int crtana_all_histograms() {
 				if (y > -360 && y < 360) {
 				if (x > -360 && x < 360) {
 					histogram1_f->Fill(x);
-					  histogram2_f->Fill(y);
+					histogram2_f->Fill(y);
 					histogram3_f->Fill(x, y);
 					if (start_spill < t1 && t1 < end_spill) {
 						histogram1_f_t->Fill(x);
@@ -336,6 +336,30 @@ int crtana_all_histograms() {
         double sigma1_f_neut = fit2D_f_neut->GetParameter(0) * exp(-0.5);
         double contours_f_neut[nContours] = {sigma1_f_neut};
         fit2D_f_neut->SetContour(nContours, contours_f_neut);
+
+
+	//attempt at greyscale
+	const int numLevels = 100;
+	int colors[numLevels];
+	for (int i = 0; i < numLevels; ++i) {
+	    	colors[i] = TColor::GetColor((255 - (i * 255 / (numLevels - 1))),
+					 (255 - (i * 255 / (numLevels - 1))),
+					 (255 - (i * 255 / (numLevels - 1))));
+	}
+	gStyle->SetPalette(numLevels, colors);
+
+	//histogram3_f->SetContour(numLevels);
+	//histogram3_b->SetContour(numLevels);
+	//histogram3_r->SetContour(numLevels);
+	//histogram3_l->SetContour(numLevels);
+	//histogram3_t->SetContour(numLevels);
+	//histogram3_d->SetContour(numLevels);
+	//histogram3_f_t->SetContour(numLevels);
+	//histogram3_f_t_g->SetContour(numLevels);
+	//histogram3_f_n->SetContour(numLevels);
+	//histogram3_f_neut->SetContour(numLevels);
+	//histogram3_f_neut_g->SetContour(numLevels);
+
 
 	//Set axes and draw
 	//Time
