@@ -14,6 +14,7 @@
 #include "TF2.h"
 #include <TStyle.h>
 #include <TMath.h>
+#include <TLegend.h>
 
 namespace fs = std::filesystem;
 
@@ -140,12 +141,17 @@ int crtana_all_histograms() {
         TCanvas* c1_f_nocr = new TCanvas("c1_f_nocr", "Front Face (x)", 800, 600);
         TCanvas* c2_f_nocr = new TCanvas("c2_f_nocr", "Front Face (y)", 800, 600);
         TCanvas* c3_f_nocr = new TCanvas("c3_f_nocr", "Front Face", 800, 600);
-        TCanvas* c3_f_n = new TCanvas("c2_f_n", "Front Face cosmic rays", 800, 600);
-      
+        TCanvas* c1_f_n = new TCanvas("c1_f_n", "Front Face cosmic rays (x)", 800, 600);
+        TCanvas* c2_f_n = new TCanvas("c2_f_n", "Front Face cosmic rays (y)", 800, 600); 
+        TCanvas* c3_f_n = new TCanvas("c3_f_n", "Front Face cosmic rays", 800, 600);
+
 	//No cosmic rays gaussian
         TCanvas* c1_f_nocr_g = new TCanvas("c1_f_nocr_g", "Front Face (x)", 800, 600);
         TCanvas* c2_f_nocr_g = new TCanvas("c2_f_nocr_g", "Front Face (y)", 800, 600);
         TCanvas* c3_f_nocr_g = new TCanvas("c3_f_nocr_g", "Front Face", 800, 600);
+
+	//No beam and time cut
+	TCanvas* c2_f_t_n = new TCanvas("c2_f_t_n", "Front Face Beam and No Beam (y)", 800, 600);
   
 	//Define times 
 	double start_spill = 1529e3;
@@ -453,10 +459,18 @@ int crtana_all_histograms() {
 	//Cosmic rays only
 	double inverse_weight = 1 / weight;
         histogram3_f_n->Scale(inverse_weight);
+        c1_f_n->cd();
+        histogram1_f_n->GetXaxis()->SetTitle("X (cm)");
+        histogram1_f_n->GetYaxis()->SetTitle("Number of Hits");
+        histogram1_f_n->Draw("HIST");
+        c2_f_n->cd();
+        histogram2_f_n->GetXaxis()->SetTitle("Y (cm)");
+        histogram2_f_n->GetYaxis()->SetTitle("Number of Hits");
+        histogram2_f_n->Draw("HIST");
         c3_f_n->cd();
         histogram3_f_n->GetXaxis()->SetTitle("X (cm)");
         histogram3_f_n->GetYaxis()->SetTitle("Y (cm)");
-        histogram3_f_n->Draw("COLZ");       
+        histogram3_f_n->Draw("COLZ");
 
 	//No cosmic rays
         c1_f_nocr->cd();
@@ -489,6 +503,18 @@ int crtana_all_histograms() {
         histogram3_f_neut_g->GetYaxis()->SetTitle("Y (cm)");
         histogram3_f_neut_g->Draw("COLZ");
         fit2D_f_neut->Draw("CONT3 SAME");
+
+	//Time cut and cosmic ray
+	c2_f_t_n->cd();
+	histogram2_f_t->SetLineColor(kBlue);
+	histogram2_f_t->Draw("HIST");
+	histogram2_f_n->SetLineColor(kRed);
+	histogram2_f_n->Draw("HIST SAME");
+	auto legend = new TLegend(0.7, 0.7, 0.9, 0.9);
+	legend->AddEntry(histogram2_f_t, "Time Cut Data", "l");
+	legend->AddEntry(histogram2_f_n, "No Beam Cosmic Ray Data", "l");
+	legend->Draw();
+	c2_f_t_n->Update();
 
 	//Save as pngs
 	//Time
@@ -525,6 +551,8 @@ int crtana_all_histograms() {
         c3_f_t_g->SaveAs("Front_face_time_cut_gaussian_fc_test.png");	
 	
 	//Cosmic rays only
+        c1_f_n->SaveAs("Front_face_x_cosmic_rays_fc_test.png");
+        c2_f_n->SaveAs("Front_face_y_cosmic_rays_fc_test.png");
         c3_f_n->SaveAs("Front_face_cosmic_rays_fc_test.png");
        
 	//No cosmic rays
@@ -536,6 +564,9 @@ int crtana_all_histograms() {
         c1_f_nocr_g->SaveAs("Front_face_x_nocr_gaussian_fc_test.png");
         c2_f_nocr_g->SaveAs("Front_face_y_nocr_gaussian_fc_test.png");
         c3_f_nocr_g->SaveAs("Front_face_nocr_gaussian_fc_test.png");
+
+	//Time cut and cosmic ray distribution
+	c2_f_t_n->SaveAs("Front_face_y_time_cut_cosmic_rays_fc_test.png");
 
 	return 0;
 }
