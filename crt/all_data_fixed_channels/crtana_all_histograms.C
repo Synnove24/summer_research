@@ -25,10 +25,10 @@ int crtana_all_histograms() {
 	//import files
 	std::vector<std::string> filenames = {
                 "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_crtana_22jul2024.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana_22jul2024.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana_22jul2024.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana_22jul2024.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana_22jul2024.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana_22jul2024.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana_22jul2024.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana_22jul2024.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana_22jul2024.root",
 
        	};
 
@@ -102,7 +102,7 @@ int crtana_all_histograms() {
         TH1D* histogram1_f_n = new TH1D("histogram1_f_n", "Front face no beam (x)", 10, -360, 360);
         TH1D* histogram2_f_n = new TH1D("histogram2_f_n", "Front face no beam (y)", 10, -360, 360);
         TH2D* histogram3_f_n = new TH2D("histogram3_f_n", "Front face no beam", 10, -360, 360, 10, -360, 360);
-      
+     
 	//Create canvases
 	//Time
 	TCanvas* c_t_t = new TCanvas("c_t_t", "t1", 800, 600);
@@ -151,8 +151,8 @@ int crtana_all_histograms() {
         TCanvas* c3_f_nocr_g = new TCanvas("c3_f_nocr_g", "Front Face", 800, 600);
 
 	//No beam and time cut
-	TCanvas* c2_f_t_n = new TCanvas("c2_f_t_n", "Front Face Beam and No Beam (y)", 800, 600);
-  
+	TCanvas* c2_f_t_n = new TCanvas("c2_f_t_n", "Front Face Beam and No Beam (y)", 800, 600); 
+
 	//Define times 
 	double start_spill = 1529e3;
         double end_spill = 1533e3;
@@ -337,16 +337,26 @@ int crtana_all_histograms() {
         double contours_f_neut[nContours] = {sigma1_f_neut};
         fit2D_f_neut->SetContour(nContours, contours_f_neut);
 
-
-	//attempt at greyscale
-	const int numLevels = 100;
-	int colors[numLevels];
+	//purple gradient	
+    	const int numLevels = 100;
+    	int colors[numLevels];
 	for (int i = 0; i < numLevels; ++i) {
-	    	colors[i] = TColor::GetColor((255 - (i * 255 / (numLevels - 1))),
-					 (255 - (i * 255 / (numLevels - 1))),
-					 (255 - (i * 255 / (numLevels - 1))));
+    		double ratio = (double)i / (numLevels - 1);
+    		int r = (int)(230 + ratio * (48 - 230));
+    		int g = (int)(204 + ratio * (25 - 204));
+    		int b = (int)(255 + ratio * (52 - 255));
+    		colors[i] = TColor::GetColor(r, g, b);
 	}
-	gStyle->SetPalette(numLevels, colors);
+	gStyle->SetPalette(numLevels, colors); 
+	// greyscale
+	//const int numLevels = 100;
+	//int colors[numLevels];
+	//for (int i = 0; i < numLevels; ++i) {
+	//    	colors[i] = TColor::GetColor((255 - (i * 255 / (numLevels - 1))),
+	//				 (255 - (i * 255 / (numLevels - 1))),
+	//				 (255 - (i * 255 / (numLevels - 1))));
+	//}
+	//gStyle->SetPalette(numLevels, colors);
 
 	//histogram3_f->SetContour(numLevels);
 	//histogram3_b->SetContour(numLevels);
@@ -357,7 +367,7 @@ int crtana_all_histograms() {
 	//histogram3_f_t->SetContour(numLevels);
 	//histogram3_f_t_g->SetContour(numLevels);
 	//histogram3_f_n->SetContour(numLevels);
-	//histogram3_f_neut->SetContour(numLevels);
+	histogram3_f_neut->SetContour(numLevels);
 	//histogram3_f_neut_g->SetContour(numLevels);
 
 
@@ -506,10 +516,11 @@ int crtana_all_histograms() {
         histogram2_f_neut->GetYaxis()->SetTitle("Number of Hits");
         histogram2_f_neut->Draw("HIST");
         c3_f_nocr->cd();
-        c3_f_nocr->SetLogz();
+        //c3_f_nocr->SetLogz();
         histogram3_f_neut->GetXaxis()->SetTitle("X (cm)");
         histogram3_f_neut->GetYaxis()->SetTitle("Y (cm)");
         histogram3_f_neut->Draw("COLZ");
+	//histogram3_f_neut->Draw("LEGO2 same");
 
 	//No cosmic rays gaussian
         c1_f_nocr_g->cd();
@@ -582,7 +593,7 @@ int crtana_all_histograms() {
 	//No cosmic rays
         c1_f_nocr->SaveAs("Front_face_x_nocr_fc_test.png");
         c2_f_nocr->SaveAs("Front_face_y_nocr_fc_test.png");
-        c3_f_nocr->SaveAs("Front_face_nocr_fc_test.png");	
+        c3_f_nocr->SaveAs("Front_face_nocr_fc_all_purple.png");	
 
 	//No cosmic rays gaussian
         c1_f_nocr_g->SaveAs("Front_face_x_nocr_gaussian_fc_test.png");
