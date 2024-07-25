@@ -15,6 +15,8 @@
 #include <TStyle.h>
 #include <TMath.h>
 #include <TLegend.h>
+#include <TGaxis.h>
+#include <TColor.h>
 
 namespace fs = std::filesystem;
 
@@ -537,18 +539,33 @@ int crtana_all_histograms() {
         histogram3_f_neut_g->GetXaxis()->SetTitle("X (cm)");
         histogram3_f_neut_g->GetYaxis()->SetTitle("Y (cm)");
         histogram3_f_neut_g->Draw("COLZ");
-        fit2D_f_neut->Draw("CONT3 SAME");
+	fit2D_f_neut->Draw("CONT3 SAME");
 
 	//Time cut and cosmic ray
+	int purple = TColor::GetColor(128, 0, 128);
+	double scale = histogram2_f_t->GetMaximum() / histogram2_f_n->GetMaximum();
+	histogram2_f_n->Scale(scale);
 	c2_f_t_n->cd();
-	histogram2_f_t->SetLineColor(kBlue);
+	histogram2_f_t->SetLineColor(purple);
 	histogram2_f_t->Draw("HIST");
-	histogram2_f_n->SetLineColor(kRed);
+	histogram2_f_n->SetLineColor(purple);
+	histogram2_f_n->SetLineStyle(2);
 	histogram2_f_n->Draw("HIST SAME");
-	auto legend = new TLegend(0.7, 0.7, 0.9, 0.9);
+	auto legend = new TLegend(0.1, 0.7, 0.3, 0.9);
 	legend->AddEntry(histogram2_f_t, "Time Cut Data", "l");
 	legend->AddEntry(histogram2_f_n, "No Beam Cosmic Ray Data", "l");
 	legend->Draw();
+	double rightAxisMin = histogram2_f_n->GetMinimum() / scale;
+	double rightAxisMax = histogram2_f_n->GetMaximum() / scale;
+	TGaxis *axis = new TGaxis(gPad->GetUxmax(), histogram2_f_t->GetMinimum(), 
+				  gPad->GetUxmax(), histogram2_f_t->GetMaximum(), 
+				  rightAxisMin, rightAxisMax, 510, "+L");
+	axis->SetLabelSize(0.035);
+	axis->SetTitleSize(0.035);
+	axis->SetLabelFont(histogram2_f_t->GetYaxis()->GetLabelFont());
+	axis->SetTitleFont(histogram2_f_t->GetYaxis()->GetTitleFont());
+	axis->SetTitle("Number of Hits (Cosmic Rays)");	
+ 	axis->Draw();
 	c2_f_t_n->Update();
 
 	//Save as pngs
@@ -601,7 +618,7 @@ int crtana_all_histograms() {
         c3_f_nocr_g->SaveAs("Front_face_nocr_gaussian_fc_test.png");
 
 	//Time cut and cosmic ray distribution
-	c2_f_t_n->SaveAs("Front_face_y_time_cut_cosmic_rays_fc_test.png");
+	c2_f_t_n->SaveAs("Front_face_y_time_cut_cosmic_rays_fc_purple_scaled_all.png");
 
 	return 0;
 }
