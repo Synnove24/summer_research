@@ -27,10 +27,10 @@ int crtana_all_histograms() {
 	//import files
 	std::vector<std::string> filenames = {
                 "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_crtana_22jul2024.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana_22jul2024.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana_22jul2024.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana_22jul2024.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana_22jul2024.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana_22jul2024.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana_22jul2024.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana_22jul2024.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana_22jul2024.root",
 
        	};
 
@@ -160,6 +160,10 @@ int crtana_all_histograms() {
         double end_spill = 1533e3;
         double start_time = 0;
         double end_time = 1000e6;
+
+	//number of entries
+	//double entries_number = 25000;
+
 
 	//Outer for-loop (loop through entries)
         for (Long64_t i = 0; i < n_entries; ++i) {
@@ -618,7 +622,7 @@ int crtana_all_histograms() {
         c3_f_nocr_g->SaveAs("Front_face_nocr_gaussian_fc_test.png");
 
 	//Time cut and cosmic ray distribution
-	c2_f_t_n->SaveAs("Front_face_y_time_cut_cosmic_rays_fc_purple_scaled_all.png");
+	c2_f_t_n->SaveAs("Front_face_y_time_cut_cosmic_rays_fc_purple_scaled_test.png");
 
 	return 0;
 }
