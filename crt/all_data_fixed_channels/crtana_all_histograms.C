@@ -27,10 +27,10 @@ int crtana_all_histograms() {
 	//import files
 	std::vector<std::string> filenames = {
                 "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_crtana_22jul2024.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana_22jul2024.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana_22jul2024.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana_22jul2024.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana_22jul2024.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana_22jul2024.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana_22jul2024.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana_22jul2024.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana_22jul2024.root",
 
        	};
 
@@ -344,16 +344,16 @@ int crtana_all_histograms() {
         fit2D_f_neut->SetContour(nContours, contours_f_neut);
 
 	//purple gradient	
-    	const int numLevels = 100;
-    	int colors[numLevels];
-	for (int i = 0; i < numLevels; ++i) {
-    		double ratio = (double)i / (numLevels - 1);
-    		int r = (int)(230 + ratio * (48 - 230));
-    		int g = (int)(204 + ratio * (25 - 204));
-    		int b = (int)(255 + ratio * (52 - 255));
-    		colors[i] = TColor::GetColor(r, g, b);
-	}
-	gStyle->SetPalette(numLevels, colors); 
+    	//const int numLevels = 100;
+    	//int colors[numLevels];
+	//for (int i = 0; i < numLevels; ++i) {
+    	//	double ratio = (double)i / (numLevels - 1);
+    	//	int r = (int)(230 + ratio * (48 - 230));
+    	//	int g = (int)(204 + ratio * (25 - 204));
+    	//	int b = (int)(255 + ratio * (52 - 255));
+    	//	colors[i] = TColor::GetColor(r, g, b);
+	//}
+	//gStyle->SetPalette(numLevels, colors); 
 	// greyscale
 	//const int numLevels = 100;
 	//int colors[numLevels];
@@ -373,7 +373,7 @@ int crtana_all_histograms() {
 	//histogram3_f_t->SetContour(numLevels);
 	//histogram3_f_t_g->SetContour(numLevels);
 	//histogram3_f_n->SetContour(numLevels);
-	histogram3_f_neut->SetContour(numLevels);
+	//histogram3_f_neut->SetContour(numLevels);
 	//histogram3_f_neut_g->SetContour(numLevels);
 
 
@@ -476,7 +476,7 @@ int crtana_all_histograms() {
         c3_f_t->cd();
         histogram3_f_t->GetXaxis()->SetTitle("X (cm)");
         histogram3_f_t->GetYaxis()->SetTitle("Y (cm)");
-        c3_f_t->SetLogz();
+        //c3_f_t->SetLogz();
         histogram3_f_t->Draw("COLZ");
 
 	//Time cut gaussian
