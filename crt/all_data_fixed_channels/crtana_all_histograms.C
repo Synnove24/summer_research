@@ -17,20 +17,21 @@
 #include <TLegend.h>
 #include <TGaxis.h>
 #include <TColor.h>
+#include <iomanip>
 
 namespace fs = std::filesystem;
 
 
-int crtana_all_histograms() {
+int print_times() {
     	std::string directory = "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/";
 
 	//import files
 	std::vector<std::string> filenames = {
                 "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_crtana_22jul2024.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana_22jul2024.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana_22jul2024.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana_22jul2024.root",
-                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana_22jul2024.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana_22jul2024.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana_22jul2024.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana_22jul2024.root",
+                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana_22jul2024.root",
 
        	};
 
@@ -59,12 +60,14 @@ int crtana_all_histograms() {
         std::vector<double>* cl_sp_y = nullptr;
         std::vector<double>* cl_sp_z = nullptr;
         std::vector<double>* cl_sp_ts1 = nullptr;
+	std::vector<unsigned long>* tdc_timestamp = nullptr;	
 
         chain.SetBranchAddress("cl_has_sp", &cl_has_sp);
         chain.SetBranchAddress("cl_sp_x", &cl_sp_x);
         chain.SetBranchAddress("cl_sp_y", &cl_sp_y);
         chain.SetBranchAddress("cl_sp_z", &cl_sp_z);
         chain.SetBranchAddress("cl_sp_ts1", &cl_sp_ts1);
+	chain.SetBranchAddress("tdc_timestamp", &tdc_timestamp);
 
 	//Define histograms
 	//Time
@@ -161,16 +164,36 @@ int crtana_all_histograms() {
         double start_time = 0;
         double end_time = 1000e6;
 
+	//Define fits
+	TF1* fit1D_x_f = new TF1("fit1D_x_f", "gaus", -400, 400);
+        TF1* fit1D_y_f = new TF1("fit1D_y_f", "gaus", -350, 400);
+        TF2* fit2D_f = new TF2("fit2D_f", "[0]*exp(-0.5*((x-[1])*(x-[1])/([2]*[2]) + (y-[3])*(y-[3])/([4]*[4])))", -400, 400, -400, 400);
+        TF1* fit1D_x_f_neut = new TF1("fit1D_x_f_neut", "gaus", -360, 360);
+        TF1* fit1D_y_f_neut = new TF1("fit1D_y_f_neut", "gaus", -360, 360);
+        TF2* fit2D_f_neut = new TF2("fit2D_f_neut", "[0]*exp(-0.5*((x-[1])*(x-[1])/([2]*[2]) + (y-[3])*(y-[3])/([4]*[4])))", -400,400,-400,400);
+
+        fit2D_f->SetParameters(1,0,100,0,100);
+        fit2D_f_neut->SetParameters(1, 0, 100, 0, 100);
+
+
 	//number of entries
 	//double entries_number = 25000;
 
 
 	//Outer for-loop (loop through entries)
         for (Long64_t i = 0; i < n_entries; ++i) {
-                chain.GetEntry(i);
-                if ((i % 10000) == 0) {
-                        std::cout << i << "k" << std::endl;
-                }
+        	chain.GetEntry(i);
+        	if ((i % 10000) == 0 || i == 0) {
+            		std::cout << i << "k" << std::endl;
+            		if (tdc_timestamp != nullptr && tdc_timestamp->size() > 0) {
+                		std::cout << "tdc_timestamp at entry " << i << ": " << tdc_timestamp->at(0) << std::endl;
+            		}
+			histogram3_f_t_g->Fit("fit2D_f", "N");
+			double chi2f_t = fit2D_f->GetChisquare();
+			int ndff_t = fit2D_f->GetNDF();
+        		double chi_per_deg_f_t = chi2f_t / ndff_t;
+			std::cout << "Front Chi-Squared/Degrees Freedom (time cut): " << chi_per_deg_f_t << std::endl;
+        	}	
                 if (cl_has_sp == nullptr || cl_has_sp->size() == 0 || !cl_has_sp->at(0)) {
                         continue;
                 }
@@ -254,18 +277,6 @@ int crtana_all_histograms() {
         histogram2_f_neut_g->Add(histogram2_f_n, -1);
         TH2F *histogram3_f_neut_g = (TH2F*)histogram3_f_t->Clone("histogram3_f_neut_g");
         histogram3_f_neut_g->Add(histogram3_f_n, -1);       
-
-	//Fit functions
-        TF1* fit1D_x_f = new TF1("fit1D_x_f", "gaus", -400, 400);
-        TF1* fit1D_y_f = new TF1("fit1D_y_f", "gaus", -350, 400);
-        TF2* fit2D_f = new TF2("fit2D_f", "[0]*exp(-0.5*((x-[1])*(x-[1])/([2]*[2]) + (y-[3])*(y-[3])/([4]*[4])))", -400, 400, -400, 400);
-        TF1* fit1D_x_f_neut = new TF1("fit1D_x_f_neut", "gaus", -360, 360);
-        TF1* fit1D_y_f_neut = new TF1("fit1D_y_f_neut", "gaus", -360, 360);
-        TF2* fit2D_f_neut = new TF2("fit2D_f_neut", "[0]*exp(-0.5*((x-[1])*(x-[1])/([2]*[2]) + (y-[3])*(y-[3])/([4]*[4])))", -400,400,-400,400);
-      
-	//Set parameters
-        fit2D_f->SetParameters(1,0,100,0,100);
-        fit2D_f_neut->SetParameters(1, 0, 100, 0, 100); 
 
 	//Fit
         histogram1_f_t_g->Fit("fit1D_x_f");
