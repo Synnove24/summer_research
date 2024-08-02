@@ -29,10 +29,10 @@ int crtana_all_histograms() {
 	//import files
 	std::vector<std::string> filenames = {
                 "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13688_crtana_22jul2024.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana_22jul2024.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13689_crtana_22jul2024.root",
                 //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13690_crtana_22jul2024.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana_22jul2024.root",
-                //"/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana_22jul2024.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13693_crtana_22jul2024.root",
+                "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/run13758_crtana_22jul2024.root",
 
        	};
 
@@ -191,7 +191,7 @@ int crtana_all_histograms() {
     	double max_timestamp = std::numeric_limits<double>::lowest();
 
 	// How often it updates histogram
-	Long64_t refresh_entries = 10000;
+	Long64_t refresh_entries = 5000;
 
 
 	//Outer for-loop (loop through entries)
