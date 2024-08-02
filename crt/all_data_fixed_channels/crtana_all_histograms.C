@@ -18,11 +18,12 @@
 #include <TGaxis.h>
 #include <TColor.h>
 #include <iomanip>
+#include <TEllipse.h>
 
 namespace fs = std::filesystem;
 
 
-int print_times() {
+int crtana_all_histograms() {
     	std::string directory = "/pnfs/sbnd/persistent/users/hlay/crt_comm_summer_2024/";
 
 	//import files
@@ -97,7 +98,7 @@ int print_times() {
         TH1D* histogram1_f_t = new TH1D("histogram1_f_t", "Front face (x)", 10, -360, 360);
         TH1D* histogram2_f_t = new TH1D("histogram2_f_t", "Front face (y)", 10, -360, 360);
         TH2D* histogram3_f_t = new TH2D("histogram3_f_t", "Front face", 10, -360, 360, 10, -360, 360);
-	
+
 	//Time cut gaussian	       
         TH1D* histogram1_f_t_g = new TH1D("histogram1_f_t_g", "Front face (x)", 10, -360, 360);
         TH1D* histogram2_f_t_g = new TH1D("histogram2_f_t_g", "Front face (y)", 10, -360, 360);
@@ -141,7 +142,7 @@ int print_times() {
         TCanvas* c1_f_t_g = new TCanvas("c1_f_t_g", "Front Face (x)", 800, 600);
         TCanvas* c2_f_t_g = new TCanvas("c2_f_t_g", "Front Face (y)", 800, 600);
         TCanvas* c3_f_t_g = new TCanvas("c3_f_t_g", "Front Face", 800, 600);
-
+	
 	//No cosmic rays
         TCanvas* c1_f_nocr = new TCanvas("c1_f_nocr", "Front Face (x)", 800, 600);
         TCanvas* c2_f_nocr = new TCanvas("c2_f_nocr", "Front Face (y)", 800, 600);
@@ -157,6 +158,14 @@ int print_times() {
 
 	//No beam and time cut
 	TCanvas* c2_f_t_n = new TCanvas("c2_f_t_n", "Front Face Beam and No Beam (y)", 800, 600); 
+
+	//Define ellipse
+	TCanvas* c_ellipse = new TCanvas("c_ellipse", "Standard Deviation Ellipse", 800, 600);
+	TH2D* h2_ellipse = new TH2D("h2_ellipse", "X vs Y with Standard Deviation Ellipse", 100, -500, 500, 100, -500, 500);
+	TEllipse* ellipse = new TEllipse();
+	ellipse->SetLineWidth(3);
+	ellipse->SetLineColor(kRed);
+	ellipse->SetFillStyle(0);
 
 	//Define times 
 	double start_spill = 1529e3;
@@ -178,13 +187,18 @@ int print_times() {
 
 	//number of entries
 	//double entries_number = 25000;
+	double min_timestamp = std::numeric_limits<double>::max();
+    	double max_timestamp = std::numeric_limits<double>::lowest();
+
+	// How often it updates histogram
+	Long64_t refresh_entries = 10000;
 
 
 	//Outer for-loop (loop through entries)
         for (Long64_t i = 0; i < n_entries; ++i) {
         	chain.GetEntry(i);
-        	if ((i % 10000) == 0 || i == 0) {
-            		std::cout << i << "k" << std::endl;
+        	if ((i % refresh_entries) == 0 || i == 0) {
+            		std::cout << i << " entries" << std::endl;
             		if (tdc_timestamp != nullptr && tdc_timestamp->size() > 0) {
                 		std::cout << "tdc_timestamp at entry " << i << ": " << tdc_timestamp->at(0) << std::endl;
             		}
@@ -192,13 +206,44 @@ int print_times() {
 			double chi2f_t = fit2D_f->GetChisquare();
 			int ndff_t = fit2D_f->GetNDF();
         		double chi_per_deg_f_t = chi2f_t / ndff_t;
-			std::cout << "Front Chi-Squared/Degrees Freedom (time cut): " << chi_per_deg_f_t << std::endl;
-        	}	
+			std::cout << "Front Chi-Squared/Degrees Freedom (time cut) at entry number " << i << ": " << chi_per_deg_f_t << std::endl;
+			double mean_x2D_f_t = fit2D_f->GetParameter(1);
+        		double stddev_x2D_f_t = fit2D_f->GetParameter(2);
+        		double mean_y2D_f_t = fit2D_f->GetParameter(3);
+        		double stddev_y2D_f_t = fit2D_f->GetParameter(4);        
+        		std::cout << "2D Front X Mean (time cut) at entry number " << i << ": " << mean_x2D_f_t << ", 2D Front X StdDev (time cut) at entry number " << i << ": " << stddev_x2D_f_t << std::endl;
+        		std::cout << "2D Front Y Mean (time cut) at entry number " << i << ": " << mean_y2D_f_t << ", 2D Front Y StdDev (time cut) at entry number " << i << ": " << stddev_y2D_f_t << std::endl;		
+	
+			ellipse->SetX1(mean_x2D_f_t);
+		    	ellipse->SetY1(mean_y2D_f_t);
+		    	ellipse->SetR1(stddev_x2D_f_t);
+		    	ellipse->SetR2(stddev_y2D_f_t);
+			
+			c_ellipse->cd();
+		    	histogram3_f_t->Draw("COLZ");
+		    	ellipse->Draw("SAME");
+		    	c_ellipse->Update();
+			
+			std::string filename = "Front_face_time_cut_gif_" + std::to_string(i) + ".png";
+            		c_ellipse->SaveAs(filename.c_str());
+	}	
                 if (cl_has_sp == nullptr || cl_has_sp->size() == 0 || !cl_has_sp->at(0)) {
                         continue;
                 }
+        	if (tdc_timestamp != nullptr && !tdc_timestamp->empty()) {
+            		for (const auto& ts : *tdc_timestamp) {
+                		if (ts >= 0) {
+                    			if (ts < min_timestamp) min_timestamp = ts;
+                    			if (ts > max_timestamp) max_timestamp = ts;
+                		}
+            		}
+        	}	
+
+
+
+	
         	for (size_t j = 0; j < cl_sp_x->size(); ++j) { //begin inner for-loop (loop through events)
-            		double t1 = cl_sp_ts1->at(j);
+			double t1 = cl_sp_ts1->at(j);
             		double x = cl_sp_x->at(j);
             		double y = cl_sp_y->at(j);
             		double z = cl_sp_z->at(j);
@@ -253,6 +298,10 @@ int print_times() {
 		}
     	} 
 	
+    	std::cout << std::fixed << std::setprecision(9);
+    	std::cout << "Timestamp range: " << min_timestamp << " to " << max_timestamp << std::endl;
+
+
 	//Calculate scaling
         double total_time = end_time - start_time;
         double spill_time = end_spill - start_spill;
