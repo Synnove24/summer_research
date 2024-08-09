@@ -20,6 +20,7 @@
 #include <iomanip>
 #include <TEllipse.h>
 
+//Access files
 namespace fs = std::filesystem;
 
 
@@ -40,7 +41,7 @@ int crtana_all_histograms() {
 
 
 
-
+	//Create a chain with all the files
 	TChain chain("crtana/tree");
 
         for (const auto& filename : filenames) {
@@ -56,6 +57,7 @@ int crtana_all_histograms() {
         return 1;
         }
 
+	//initialize variable
         std::vector<bool>* cl_has_sp = nullptr;
         std::vector<double>* cl_sp_x = nullptr;
         std::vector<double>* cl_sp_y = nullptr;
@@ -71,10 +73,10 @@ int crtana_all_histograms() {
 	chain.SetBranchAddress("tdc_timestamp", &tdc_timestamp);
 
 	//Define histograms
-	//Time
+	//Time (ts1)
         TH1D* histogram_t_t = new TH1D("histogram2D", "Time", 300, 1520e3, 1540e3);
 	
-	//No time cut
+	//No time cut (all faces)
 	TH1D* histogram1_f = new TH1D("histogram1_f", "Front face (x)", 128, -400, 400);
 	TH1D* histogram2_f = new TH1D("histogram2_f", "Front face (y)", 128, -400, 400);
 	TH2D* histogram3_f = new TH2D("histogram3_f", "Front face", 128, -400, 400, 128, -400, 400);
@@ -94,17 +96,17 @@ int crtana_all_histograms() {
 	TH1D* histogram2_d = new TH1D("histogram2_d", "Bottom face (z)", 128, -200, 800);
 	TH2D* histogram3_d = new TH2D("histogram3_d", "Bottom face", 128, -400, 400, 128, -200, 800);	
 
-	//Time cut
+	//Time cut (front face only)
         TH1D* histogram1_f_t = new TH1D("histogram1_f_t", "Front face (x)", 10, -360, 360);
         TH1D* histogram2_f_t = new TH1D("histogram2_f_t", "Front face (y)", 10, -360, 360);
         TH2D* histogram3_f_t = new TH2D("histogram3_f_t", "Front face", 10, -360, 360, 10, -360, 360);
 
-	//Time cut gaussian	       
+	//Time cut gaussian (front face)	       
         TH1D* histogram1_f_t_g = new TH1D("histogram1_f_t_g", "Front face (x)", 10, -360, 360);
         TH1D* histogram2_f_t_g = new TH1D("histogram2_f_t_g", "Front face (y)", 10, -360, 360);
         TH2D* histogram3_f_t_g = new TH2D("histogram3_f_t_g", "Front face", 10, -360, 360, 10, -360, 360);
        
-	//No cosmic rays
+	//Cosmic ray distribution (front face)
         TH1D* histogram1_f_n = new TH1D("histogram1_f_n", "Front face no beam (x)", 10, -360, 360);
         TH1D* histogram2_f_n = new TH1D("histogram2_f_n", "Front face no beam (y)", 10, -360, 360);
         TH2D* histogram3_f_n = new TH2D("histogram3_f_n", "Front face no beam", 10, -360, 360, 10, -360, 360);
@@ -143,7 +145,7 @@ int crtana_all_histograms() {
         TCanvas* c2_f_t_g = new TCanvas("c2_f_t_g", "Front Face (y)", 800, 600);
         TCanvas* c3_f_t_g = new TCanvas("c3_f_t_g", "Front Face", 800, 600);
 	
-	//No cosmic rays
+	//No cosmic rays and only cosmic rays
         TCanvas* c1_f_nocr = new TCanvas("c1_f_nocr", "Front Face (x)", 800, 600);
         TCanvas* c2_f_nocr = new TCanvas("c2_f_nocr", "Front Face (y)", 800, 600);
         TCanvas* c3_f_nocr = new TCanvas("c3_f_nocr", "Front Face", 800, 600);
@@ -191,7 +193,7 @@ int crtana_all_histograms() {
     	double max_timestamp = std::numeric_limits<double>::lowest();
 
 	// How often it updates histogram
-	Long64_t refresh_entries = 5000;
+	Long64_t refresh_entries = 10000;
 
 
 	//Outer for-loop (loop through entries)
